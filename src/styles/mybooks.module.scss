@@ -1,0 +1,29 @@
+.btnChaptitle {
+    cursor: pointer;
+    border: 1px solid green;
+    background: lightgreen;
+    color: #404040;
+    min-width: 20px;
+    height: 20px;
+  }
+.Container {
+  display: flex;
+  width: 100%;
+  min-height: 300px;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.Item {
+  width: 29%;
+  margin: 4% 2% 4% 2%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.Item img {
+  height: 150px;
+  width: 150px;
+  margin-bottom: 20px;
+}

@@ -1,0 +1,153 @@
+.Slider {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+ 
+  .Slide {
+    border: 1px solid white;
+    outline: 1px solid black;
+    width: 400px;
+    height: 600px;
+    margin: auto;
+    box-shadow: 13px 10px 6px 1px rgba(173, 169, 150, 0.9);
+  }
+
+  .Credits {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    width: 28.5vw;
+    margin-right: 7vw;
+    margin-left: 3vw;
+    min-height: 80vh;
+    line-height: 15vh;
+    font-size: 32px;
+  }
+
+  .Description {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    width: 28.5vw;
+    margin-left: 7vw;
+    margin-right: 3vw;
+    min-height: 80vh;
+    font-size: 20px;
+  }
+ 
+  .Buttons {
+      justify-content: space-between;
+      align-items: center;
+      display: flex;
+  }
+  .Buttons span {
+      width: 50%;
+      font-size: 34px;
+      cursor: pointer;
+  }
+  .left {
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      padding-left: 12%;
+      cursor: pointer;
+  }
+  .right {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      padding-right: 12%;
+      cursor: pointer;
+  }
+
+  .slideLeft, .slideRight {
+    display: flex;
+    align-items: flex-end;
+    width: 100px;
+    height: 150px;
+  }
+  .slideLeft img {
+    height: 50px;
+    width: 75px;
+  }
+  .slideRight img {
+    height: 50px;
+    width: 75px;
+  }
+  @keyframes opacity{
+    0%{opacity: 0}
+    100%{opacity: 1}
+  }
+  @keyframes nopacity{
+    0%{opacity: 1}
+    100%{opacity: 0}
+  }
+  .opacity {
+    animation: opacity 1s ease-in-out forwards;
+  }
+  .nonopacity {
+    animation: nopacity 1s ease-in-out forwards;
+  }
+
+  .title {
+    width: 400px;
+    background: #181818;
+    opacity: 0.7;
+    color: white;
+    position: relative;
+    top: -100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 36px;
+  }
+  .upTitle {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .upPanel{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+  .panel {
+    border-radius: 3px;
+    width: 20%;
+    background: white;
+    opacity: 0.8;
+    color: white;
+    position: relative;
+    display: flex;
+    justify-content: space-around;
+    z-index: 100;
+  }
+  
+  .changeSlideCircle {
+    cursor: pointer;
+    color: #474747;
+  }
+  .Cover {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .activeCircle {
+    color: red;
+  }
+
+@media (max-width: 549px) {
+  .Slide {
+    width: 200px;
+    height: 300px;
+  }
+  .title {
+    width: 200px;
+  }
+}
