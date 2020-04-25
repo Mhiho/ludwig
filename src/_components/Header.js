@@ -1,90 +1,126 @@
-import { NavLink, Link, useHistory,withRouter } from "react-router-dom"
-import React, {useContext,useState} from "react"
-import classes from '../styles/index.module.scss'
-import Hamburger from './Hamburger'
-import {ThemeContext} from './ThemeContext'
-import { getUser, isLoggedIn, logout } from "../services/auth"
-
+import { NavLink, withRouter } from 'react-router-dom';
+import React, { useState } from 'react';
+import navStyle from '../styles/navigation.module.scss';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {
+  faBars,
+  faCaretDown,
+  faUserCircle
+} from '@fortawesome/free-solid-svg-icons';
+import logo from '../assets/images/logo_bookcase_white.png';
 const Header = () => {
-
-  const {animate} = useContext(ThemeContext)
-  const {light, setLight} = useContext(ThemeContext)
-  const [panelOn,setPanelOn] = useState(false)
-  const [miniPanelOn, setMiniPanelOn] = useState(false)
-  const toggleTheme = () => {
-    setLight(!light);
+  const [hide, subPagesOnOff] = useState(true);
+  const togglSubPages = () => {
+    subPagesOnOff(!hide);
   };
-  const toggleMiniPanel = () => {
-    setMiniPanelOn(!miniPanelOn)
-  }
-  const togglePanel = () => {
-    setPanelOn(!panelOn)
-  }
-  return(
-    <header className={light ? `${classes.Header} ${classes.Header2}` :`${classes.Header}` }>
-    <nav  className={light ? `${classes.navMain}` : `${classes.navMain2}`}>
-      <div className={classes.leftMenu}>
 
-        <Hamburger />
-        <Link to={{pathname: '/'}} className={light ? `${classes.SiteTitle} ${classes.SiteTitle2}` : `${classes.SiteTitle}` }>
-          Ich Otchłanie
-        </Link>
-      </div>
-      <div className={classes.middleMenu}></div>
-      <div className={classes.rightMenu}>
-        <button className={light ? `${classes.Button} ${classes.Button2}` : `${classes.Button}` } onClick={toggleTheme}>kolor</button>
-        <ul>
+  const [close, menuOnOff] = useState(true);
+  const toggleMenu = () => {
+    menuOnOff(!close);
+  };
 
-          <li><NavLink to="/books" className={light ?  `${classes.Link} ${classes.Link2}` : `${classes.Link}`} activeClassName={light ? `${classes.active}` : `${classes.active2}`} >Książki</NavLink></li>
-          <li><NavLink to="/poems"  className={light ? `${classes.Link} ${classes.Link2}` : `${classes.Link}` } activeClassName={light ? `${classes.active}` : `${classes.active2}`}  >Wiersze</NavLink></li>
-        {isLoggedIn() ? 
-<div><NavLink to="#" onClick={togglePanel}  className={light ? `${classes.Link} ${classes.Link2}` : `${classes.Link}` }  activeClassName={light ? `${classes.active}` : `${classes.active2}`}><span className={panelOn ? `${classes.hideIt}` : ``} >{getUser().user.name}</span></NavLink>
-                {panelOn ? <div className={light ? `${classes.Submenu}` : `${classes.Submenu2}` }> 
-                              <ul className={light ? `${classes.mainSubmenu2}` : `${classes.mainSubmenu}`}>
-                                <li onClick={togglePanel} className={classes.closePanel}>×</li>
-                                <li><Link to='/myProfile'>Mój profil</Link></li>
-                                <li><Link to='/mine'>Moje książki</Link></li>
-                                <li><Link to='/minePoems'>Moje wiersze</Link></li>
-                                <li><Link to='/society'>Społeczność</Link></li>
-                                <li><Link to='/settings'>Administracja</Link></li>
-                                <li><Link onClick={logout} to='/logout'>Wyloguj się</Link></li> 
-                             </ul> 
-                           </div> : null}
-           </div>
-         : <li><NavLink to="/login" className={light ? `${classes.Link} ${classes.Link2}` : `${classes.Link}` }  activeClassName={light ? `${classes.active}` : `${classes.active2}`} >Zaloguj</NavLink></li>
-
+  const elements = [
+    {
+      name: 'Książki',
+      path: '/books',
+      subPages: []
+    },
+    {
+      name: 'Aktualności',
+      path: '/news',
+      subPages: []
+    },
+    {
+      name: '???',
+      path: '',
+      close: true,
+      subPages: [
+        {
+          name: 'Felietony',
+          path: '/feuilletons'
+        },
+        {
+          name: 'Opowiadania',
+          path: '/story'
         }
-          
-          </ul>
-      </div>
+      ]
+    },
+    {
+      name: 'Wiersze',
+      path: '/poems',
+      subPages: []
+    }
+  ];
 
-    </nav>
-        <div className={window.matchMedia("(max-width: 999px)") && !animate ? `${classes.smallNav}` : `${classes.smallNav} ${classes.correction}`}>
-          <ul  className={light ? `${classes.navUl} ${classes.navUl2} ${classes.hiddenMenu}`: `${classes.navUl} ${classes.hiddenMenu}`}>
-            <li onClick={toggleTheme} className={light ? `${classes.switch}` : `${classes.switch2}`}>◑</li>
-            <li><NavLink to="/books" className={light ?  `${classes.Link} ${classes.Link2}` : `${classes.Link}`} activeClassName={light ? `${classes.active}` : `${classes.active2}`} >Książki</NavLink></li>
-            <li><NavLink to="/poems"  className={light ? `${classes.Link} ${classes.Link2}` : `${classes.Link}` } activeClassName={light ? `${classes.active}` : `${classes.active2}`}  >Wiersze</NavLink></li>
-            {isLoggedIn() ?
-              <li><NavLink onClick={toggleMiniPanel} to="#" className={light ?  `${classes.Link} ${classes.Link2}` : `${classes.Link}`} activeClassName={light ? `${classes.active}` : `${classes.active2}`} ><span>{getUser().user.name}</span></NavLink> </li>
-            : <li><NavLink to="/login" className={light ?  `${classes.Link} ${classes.Link2}` : `${classes.Link}`} activeClassName={light ? `${classes.active}` : `${classes.active2}`} >Zaloguj</NavLink></li> 
-          }
-          </ul>
-                    {miniPanelOn ? <div className={light ? `${classes.miniSubmenu}` : `${classes.miniSubmenu2}` }> 
-                              <ul className={light ? `${classes.mainMiniSubmenu2}` : `${classes.mainMiniSubmenu}`}>
-                                <li onClick={toggleMiniPanel} className={classes.closeMiniPanel}>×</li>
-                                <li><Link to='/myProfile'>Mój profil</Link></li>
-                                <li><Link to='/mine'>Moje książki</Link></li>
-                                <li><Link to='/minePoems'>Moje wiersze</Link></li>
-                                <li><Link to='/society'>Społeczność</Link></li>
-                                <li><Link to='settings'>Administracja</Link></li>
-                                <li><Link onClick={logout} to='/logout'>Wyloguj się</Link></li> 
-                             </ul> 
-                           </div> : null}
-         
+  const showSubPages = subPages => {
+    return subPages.map(page => {
+      return (
+        <NavLink
+          key={page.name}
+          to={page.path}
+          className={`${navStyle.subLink} p-2`}
+          activeClassName={navStyle.subLinkActive}
+        >
+          {page.name}
+        </NavLink>
+      );
+    });
+  };
+
+  const navItems = elements.map(item => {
+    return !item.subPages.length ? (
+      <NavLink
+        key={item.name}
+        to={item.path}
+        className={`${navStyle.link} p-4 ml-2 mr-2`}
+        activeClassName={navStyle.linkActive}
+      >
+        {item.name}
+      </NavLink>
+    ) : (
+      <div className={`${navStyle.link} p-4 ml-2 mr-2`} key={item.name}>
+        <div className={navStyle.dropDown} onClick={togglSubPages}>
+          <span className='mr-2'>{item.name}</span>
+          <FontAwesomeIcon icon={faCaretDown} color='#ffffff' />
+          <div
+            className={`${navStyle.subPages} ${
+              hide ? 'd-none' : 'd-flex flex-column justify-content-start`'
+            }`}
+          >
+            {showSubPages(item.subPages)}
+          </div>
         </div>
-  </header>
-)
-}
+      </div>
+    );
+  });
 
+  return (
+    <header className={navStyle.header}>
+      <div
+        className={`${navStyle.globalNav}
+          container-fluid d-flex justify-content-between`}
+      >
+        <section className='d-flex justify-content-center'>
+          <NavLink className='p-4' to='/'>
+            <img src={logo} alt='logo dream book case'></img>
+          </NavLink>
+        </section>
+        <section className='d-none d-lg-flex justify-content-between'>
+          {navItems}
+        </section>
+        <section className='d-flex justify-content-between'>
+          <NavLink className='p-4' to='/profile'>
+            <FontAwesomeIcon icon={faUserCircle} color='#ffffff' />
+          </NavLink>
+          <div className='p-4'>
+            <div className={navStyle.hamburger} onClick={toggleMenu}>
+              <FontAwesomeIcon icon={faBars} color='#ffffff' />
+            </div>
+          </div>
+        </section>
+      </div>
+    </header>
+  );
+};
 
-export default withRouter(Header)
+export default withRouter(Header);
