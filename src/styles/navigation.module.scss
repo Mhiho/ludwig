@@ -1,0 +1,56 @@
+$white: #ffffff;
+$black: #000000;
+$lightBlack: rgba(0, 0, 0, 0.7);
+.header {
+  position: fixed;
+  right: 0;
+  left: 0;
+}
+.globalNav {
+  background-color: black;
+}
+.link {
+  color: $white;
+}
+.link:hover {
+  box-shadow: inset 0px -2px 0px 0px $white;
+  color: $white !important;
+}
+.linkActive {
+  box-shadow: inset 0px -3px 0px 0px $white !important;
+}
+.subLink {
+  color: $white;
+  background-color: $lightBlack;
+}
+.subLink:first-child {
+  border-radius: 5px 5px 0 0;
+}
+.subLink:last-child {
+  border-radius: 0 0 5px 5px;
+}
+.subLink:hover {
+  color: $white;
+  background-color: $black;
+}
+.subLinkActive {
+  background-color: $black !important;
+}
+.dropDown {
+  color: $white;
+  cursor: pointer;
+  position: relative;
+}
+.subPages {
+  position: absolute;
+  top: 25px;
+  right: 0px;
+  border-radius: 5px;
+}
+.hamburger {
+  cursor: pointer;
+}
+
+.dNone {
+  display: none;
+}

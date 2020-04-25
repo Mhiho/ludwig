@@ -1,37 +1,84 @@
-import React, { useState, useContext} from "react"
-import classes from '../styles/index.module.scss'
-import { ThemeContext } from './ThemeContext';
+import React from 'react';
+import { NavLink } from 'react-router-dom';
+import menuStyle from '../styles/hamburger.module.scss';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTimes } from '@fortawesome/free-solid-svg-icons';
 
+const Hamburger = data => {
+  const logOut = () => {
+    console.log('logOut');
+  };
 
-const Hamburger = () => {
+  const toggleMenu = () => {
+    data.toggleMenu();
+  };
 
-    const {animate,setAnimate} = useContext(ThemeContext)
+  const getSubLinks = subLinks => {
+    return subLinks.map(link => {
+      return (
+        <NavLink
+          key={link.name}
+          to={link.path}
+          className={`${menuStyle.link} mb-2`}
+        >
+          {link.name}
+        </NavLink>
+      );
+    });
+  };
 
-    const toggle = () => {
-      setAnimate(!animate);
-    };
+  const navItems = data.elements.map(item => {
+    return !item.subPages.length ? (
+      <NavLink
+        key={item.name}
+        to={item.path}
+        className={`${menuStyle.link} mb-2`}
+      >
+        {item.name}
+      </NavLink>
+    ) : (
+      <div key={item.name}>
+        <div className='d-flex flex-column justify-content-center'>
+          {getSubLinks(item.subPages)}
+        </div>
+      </div>
+    );
+  });
 
-        return (
-         <div onClick={toggle} className={classes.hamburger}>
-
-          <div className={`${classes.upLine}`} >
-            <div className={animate ? `${classes.upLeft} ${classes.upLeftAnim}` : `${classes.upLeft}`}></div>
-            <div className={animate ? `${classes.upMiddle} ${classes.upMiddleAnim}` : `${classes.upMiddle}`}></div>
-            <div className={animate ? `${classes.upRight} ${classes.upRightAnim}` : `${classes.upRight}`}></div>
+  return (
+    <div>
+      <div
+        className={`${menuStyle.menuBackground} ${data.close ? 'd-none' : ''}`}
+      ></div>
+      <div
+        className={`${menuStyle.menuHide} ${
+          !data.close ? menuStyle.menuShow : ''
+        } d-flex flex-column justify-content-between`}
+      >
+        <div
+          className={`${menuStyle.closeHide} ${
+            !data.close ? menuStyle.closeShow : ''
+          } p-2`}
+          onClick={toggleMenu}
+        >
+          <FontAwesomeIcon icon={faTimes} color='#ffffff' />
+        </div>
+        <div
+          className={`${menuStyle.links} d-flex flex-column justify-content-center`}
+        >
+          <div className='d-flex flex-column justify-content-center'>
+            {navItems}
           </div>
-          <div className={classes.middleLine}>
-             <div className={animate ? `${classes.middleLeft} ${classes.middleLeftAnim}` : `${classes.middleLeft}`}></div>
-            <div className={`${classes.middleMiddle}`}></div>
-            <div className={animate ? `${classes.middleRight} ${classes.middleRightAnim}` : `${classes.middleRight}`}></div>
+          <div
+            className={`${menuStyle.logOut} mt-4 pt-3 pb-3`}
+            onClick={logOut}
+          >
+            wyloguj się
           </div>
-          <div className={classes.downLine}>
-          <div className={animate ? `${classes.upLeft} ${classes.upLeftAnim}` : `${classes.upLeft}`}></div>
-            <div className={animate ? `${classes.upMiddle} ${classes.upMiddleAnim}` : `${classes.upMiddle}`}></div>
-            <div className={animate ? `${classes.upRight} ${classes.upRightAnim}` : `${classes.upRight}`}></div>
-          </div>
-            </div>
-        )
-  
-}
+        </div>
+      </div>
+    </div>
+  );
+};
 
-export default Hamburger
+export default Hamburger;
