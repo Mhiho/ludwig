@@ -4,10 +4,12 @@ import PrivateRoute from './_components/PrivateRoute';
 import { HashRouter, Route, Switch } from 'react-router-dom';
 import { MoonLoader } from 'react-spinners';
 import { css } from '@emotion/core';
-import { ThemeProvider } from './_components/ThemeContext';
-import { createBrowserHistory } from 'history';
-import classes from './styles/app.module.scss';
-import empty from '../src/assets/images/empty.png';
+import {ThemeProvider} from './store/Store'
+import {createBrowserHistory } from 'history'
+import classes from './styles/app.module.scss'
+import empty from '../src/assets/images/empty.png'
+
+
 // const HomePage = lazy(() => import("./components/HomePage/HomePage"));
 // const Login = lazy(()=> import("./components/Login/Login"));
 // const MyProfile = lazy(()=> import('./components/MyProfile/MyProfile'));
@@ -55,6 +57,7 @@ class App extends Component {
       <HashRouter>
         <ThemeProvider>
           <Layout>
+
             <Suspense
               fallback={
                 <div

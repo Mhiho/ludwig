@@ -1,4 +1,7 @@
-import React from 'react';
+import React, { useState, useContext} from "react"
+import classes from '../styles/index.module.scss'
+import { ThemeContext } from '../store/Store';
+
 import { NavLink } from 'react-router-dom';
 import menuStyle from '../styles/hamburger.module.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';

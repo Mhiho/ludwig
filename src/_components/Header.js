@@ -1,6 +1,9 @@
-import { NavLink, withRouter } from 'react-router-dom';
-import Hamburger from './Hamburger';
-import React, { useState } from 'react';
+import { NavLink, Link, useHistory,withRouter } from "react-router-dom"
+import React, {useContext,useState} from "react"
+import classes from '../styles/index.module.scss'
+import Hamburger from './Hamburger'
+import {ThemeContext} from '../store/Store'
+import { getUser, isLoggedIn, logout } from "../services/auth"
 import navStyle from '../styles/navigation.module.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
@@ -10,6 +13,7 @@ import {
   faUserCircle
 } from '@fortawesome/free-solid-svg-icons';
 import logo from '../assets/images/logo_bookcase_white.png';
+
 const Header = () => {
   const [isMenuHamburger, isMenuHamburgerTrue] = useState(false);
   const isMenuHamburgerTrueFunc = () => {

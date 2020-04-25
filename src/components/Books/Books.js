@@ -5,6 +5,7 @@ import classes from '../../styles/books.module.scss'
 import empty from '../../assets/images/empty.png'
 import loading from '../../styles/app.module.scss'
 
+
 const base64Flag = 'data:image/jpeg;base64,';
 class Books extends Component {
   _isMounted = false;

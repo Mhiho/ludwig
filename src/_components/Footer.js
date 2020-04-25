@@ -1,7 +1,7 @@
 import React,{useContext} from 'react'
 import {Link} from 'react-router-dom';
 import classes from '../styles/index.module.scss'
-import { ThemeContext } from './ThemeContext';
+import { ThemeContext } from '../store/Store';
 
 const Footer = () => {
     const {light} = useContext(ThemeContext)

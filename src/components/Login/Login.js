@@ -60,7 +60,7 @@ class Login extends React.Component {
             <div className={classes.Container}>
     
             <h2 className={classes.pageTitle}>Zaloguj:</h2> 
-            <h3 style={{height: '50px', width: '100%'}}>{this.state.info}</h3>
+            <h3 style={{height: '40px', width: '100%'}}>{this.state.info}</h3>
             <form
               method="post"
               onSubmit={
