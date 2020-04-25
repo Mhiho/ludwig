@@ -1,14 +1,20 @@
 import { NavLink, withRouter } from 'react-router-dom';
+import Hamburger from './Hamburger';
 import React, { useState } from 'react';
 import navStyle from '../styles/navigation.module.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faBars,
   faCaretDown,
+  faCaretUp,
   faUserCircle
 } from '@fortawesome/free-solid-svg-icons';
 import logo from '../assets/images/logo_bookcase_white.png';
 const Header = () => {
+  const [isMenuHamburger, isMenuHamburgerTrue] = useState(false);
+  const isMenuHamburgerTrueFunc = () => {
+    isMenuHamburgerTrue(true);
+  };
   const [hide, subPagesOnOff] = useState(true);
   const togglSubPages = () => {
     subPagesOnOff(!hide);
@@ -16,6 +22,9 @@ const Header = () => {
 
   const [close, menuOnOff] = useState(true);
   const toggleMenu = () => {
+    if (!isMenuHamburger) {
+      isMenuHamburgerTrueFunc();
+    }
     menuOnOff(!close);
   };
 
@@ -31,19 +40,14 @@ const Header = () => {
       subPages: []
     },
     {
-      name: '???',
-      path: '',
-      close: true,
-      subPages: [
-        {
-          name: 'Felietony',
-          path: '/feuilletons'
-        },
-        {
-          name: 'Opowiadania',
-          path: '/story'
-        }
-      ]
+      name: 'Felietony',
+      path: '/feuilletons',
+      subPages: []
+    },
+    {
+      name: 'Opowiadania',
+      path: '/story',
+      subPages: []
     },
     {
       name: 'Wiersze',
@@ -81,7 +85,10 @@ const Header = () => {
       <div className={`${navStyle.link} p-4 ml-2 mr-2`} key={item.name}>
         <div className={navStyle.dropDown} onClick={togglSubPages}>
           <span className='mr-2'>{item.name}</span>
-          <FontAwesomeIcon icon={faCaretDown} color='#ffffff' />
+          <FontAwesomeIcon
+            icon={hide ? faCaretDown : faCaretUp}
+            color='#ffffff'
+          />
           <div
             className={`${navStyle.subPages} ${
               hide ? 'd-none' : 'd-flex flex-column justify-content-start`'
@@ -109,7 +116,11 @@ const Header = () => {
           {navItems}
         </section>
         <section className='d-flex justify-content-between'>
-          <NavLink className='p-4' to='/profile'>
+          <NavLink
+            className='p-4'
+            activeClassName={navStyle.linkActive}
+            to='/profile'
+          >
             <FontAwesomeIcon icon={faUserCircle} color='#ffffff' />
           </NavLink>
           <div className='p-4'>
@@ -118,6 +129,9 @@ const Header = () => {
             </div>
           </div>
         </section>
+      </div>
+      <div className={`${!isMenuHamburger ? 'invisible' : ''}`}>
+        <Hamburger elements={elements} close={close} toggleMenu={toggleMenu} />
       </div>
     </header>
   );
