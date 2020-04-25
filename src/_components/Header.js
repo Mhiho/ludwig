@@ -2,7 +2,7 @@ import { NavLink, Link, useHistory,withRouter } from "react-router-dom"
 import React, {useContext,useState} from "react"
 import classes from '../styles/index.module.scss'
 import Hamburger from './Hamburger'
-import {ThemeContext} from './ThemeContext'
+import {ThemeContext} from '../store/Store'
 import { getUser, isLoggedIn, logout } from "../services/auth"
 
 const Header = () => {

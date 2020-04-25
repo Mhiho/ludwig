@@ -2,7 +2,8 @@ import React, {useContext,useEffect, useState} from "react"
 import Header from "./Header"
 import Footer from "./Footer"
 import classes from '../styles/index.module.scss'
-import {ThemeContext} from './ThemeContext'
+import {ThemeContext} from '../store/Store'
+import ErrorBoundary from "../hoc/errorHandler"
 
 
 const Layout = ({ children }) => {
@@ -29,7 +30,10 @@ const Layout = ({ children }) => {
         <main>
           <div className={classes.marginTop}>
           <div>
+            <ErrorBoundary>
+
           {children }
+            </ErrorBoundary>
           </div>
           </div>
           </main>

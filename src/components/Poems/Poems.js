@@ -4,7 +4,9 @@ import {adresse} from '../../config'
 import classes from '../../styles/mypoems.module.scss'
 import loading from '../../styles/app.module.scss'
 import SearchPoem from '../../_components/SearchPoem'
-
+import axios from 'axios'
+import { useStore, useActions } from '../../store/Store'
+import { useDispatch, useSelectors } from 'react-redux'
 class Poems extends Component {
 
     state={
@@ -16,14 +18,14 @@ class Poems extends Component {
         showEmpty: false
       }
     componentDidMount(){
-        fetch(`${adresse}poems/all`)
-        .then(response => response.json())
-         .then(poems => {
-           const shuffled = poems.sort(() => 0.5 - Math.random())
-           const shuffledFive = shuffled.slice(0,5)        
-           this.setState({ poems: shuffledFive }, ()=>{
-                        this.setState({isLoading: false})
-                       })
+        axios.get(`${adresse}poems/al`)
+        .then(res => {
+            const poems = res.data
+            const shuffled = poems.sort(() => 0.5 - Math.random())
+            const shuffledFive = shuffled.slice(0,5)        
+            this.setState({ poems: shuffledFive }, ()=>{
+                         this.setState({isLoading: false})
+                        })
          })
     }
     change(){

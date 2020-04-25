@@ -4,10 +4,11 @@ import PrivateRoute from "./_components/PrivateRoute";
 import { HashRouter, Route, Switch } from 'react-router-dom'
 import { MoonLoader } from 'react-spinners';
 import { css } from '@emotion/core';
-import {ThemeProvider} from './_components/ThemeContext'
+import {ThemeProvider} from './store/Store'
 import {createBrowserHistory } from 'history'
 import classes from './styles/app.module.scss'
 import empty from '../src/assets/images/empty.png'
+
 // const HomePage = lazy(() => import("./components/HomePage/HomePage"));
 // const Login = lazy(()=> import("./components/Login/Login"));
 // const MyProfile = lazy(()=> import('./components/MyProfile/MyProfile'));
@@ -55,6 +56,7 @@ class App extends Component {
       <HashRouter>
         <ThemeProvider>
           <Layout>
+          
         <Suspense fallback={<div style={{width: '100vw', height: '100vh', display: 'flex', justifyContent: 'center', alignItems: 'center'}}><h1 style={{color: 'white'}}>Loading...</h1></div>}
               >
         <Route  path="/login" component={Login} />
@@ -62,7 +64,9 @@ class App extends Component {
 
         <Route  path='/books' component={Books} />
         <Route path='/logout' component={Logout} />
+        
         <Route  path='/poems' component={Poems} />
+
         <PrivateRoute  path='/society' component={SocialRoom} />
         <PrivateRoute  path='/poemReading/:id' component={PoemReading} />
         <PrivateRoute  path='/addPoem' component={AddPoem} />

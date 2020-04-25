@@ -1,6 +1,6 @@
 import React, { useState, useContext} from "react"
 import classes from '../styles/index.module.scss'
-import { ThemeContext } from './ThemeContext';
+import { ThemeContext } from '../store/Store';
 
 
 const Hamburger = () => {
