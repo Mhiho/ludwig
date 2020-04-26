@@ -22,11 +22,13 @@ export const useDispatch = () => {
 const defaultState = {
   light: false,
   bookId: null,
-  animate: false,
+  animate: false
+}
+const initStateReducer = {
   counter: 0
 }
 
-const rootReducer = (state = defaultState, action = {}) => {
+const rootReducer = (state = initStateReducer, action = {}) => {
   switch (action.type) {
     case "ADD": {
       return {
@@ -34,14 +36,14 @@ const rootReducer = (state = defaultState, action = {}) => {
         counter: state.counter + 1
       }
     }
-  default:
-    return state;
+    default:
+      return state;
   }
 }
 
 const actions = {
   counter: {
-    addCounter: payload => ({ type: "ADD", payload})
+    addCounter: payload => ({ type: "ADD", payload })
   }
 }
 // export const addAction = () => {
@@ -60,18 +62,18 @@ const actions = {
 export const ThemeContext = createContext(defaultState)
 
 export const ThemeProvider = ({ children }) => {
-    const [light, setLight] = useState(false);
-    const [bookId, setBookId] = useState(null);
-    const [animate, setAnimate] = useState(false)
-    return (
-      <ThemeContext.Provider value={{light,setLight,bookId,setBookId,animate,setAnimate}}>
-        {children}
-      </ThemeContext.Provider>
-    ); 
+  const [light, setLight] = useState(false);
+  const [bookId, setBookId] = useState(null);
+  const [animate, setAnimate] = useState(false)
+  return (
+    <ThemeContext.Provider value={{ light, setLight, bookId, setBookId, animate, setAnimate }}>
+      {children}
+    </ThemeContext.Provider>
+  );
 }
 
 function StoreProvider({ children }) {
-  const [state, dispatch] = useReducer(rootReducer, defaultState)
+  const [state, dispatch] = useReducer(rootReducer, initStateReducer)
   return (
     <State.Provider value={state}>
       <Dispatch.Provider value={dispatch}>
