@@ -1,4 +1,4 @@
-import React, { Component, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { adresse } from '../../config'
 import classes from '../../styles/mypoems.module.scss'
@@ -9,7 +9,7 @@ import { useStore, useActions } from '../../store/Store'
 import { useDispatch, useSelectors } from 'react-redux'
 
 const Poems = () => {
-
+  
     const [isLoading, setIsLoading] = useState(true)
     const [poems, setPoems] = useState([])
     const [poemNr, setPoemNr] = useState(0)
@@ -49,7 +49,6 @@ const Poems = () => {
             setOpacity(true)
         }
     }
-    console.log(poems)
     return (
         <div>
 
