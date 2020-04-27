@@ -1,1 +1,1 @@
-export const adresse = 'https://test123testing.pl/'
+export const adresse = 'https://test123testing.pl'

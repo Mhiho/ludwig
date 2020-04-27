@@ -1,8 +1,8 @@
-import { NavLink, Link, useHistory,withRouter } from "react-router-dom"
-import React, {useContext,useState} from "react"
+import { NavLink, Link, useHistory, withRouter } from "react-router-dom"
+import React, { useContext, useState } from "react"
 import classes from '../styles/index.module.scss'
 import Hamburger from './Hamburger'
-import {ThemeContext} from '../store/Store'
+import { ThemeContext } from '../store/ContextAPI'
 import { getUser, isLoggedIn, logout } from "../services/auth"
 import navStyle from '../styles/navigation.module.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -86,23 +86,23 @@ const Header = () => {
         {item.name}
       </NavLink>
     ) : (
-      <div className={`${navStyle.link} p-4 ml-2 mr-2`} key={item.name}>
-        <div className={navStyle.dropDown} onClick={togglSubPages}>
-          <span className='mr-2'>{item.name}</span>
-          <FontAwesomeIcon
-            icon={hide ? faCaretDown : faCaretUp}
-            color='#ffffff'
-          />
-          <div
-            className={`${navStyle.subPages} ${
-              hide ? 'd-none' : 'd-flex flex-column justify-content-start`'
-            }`}
-          >
-            {showSubPages(item.subPages)}
+        <div className={`${navStyle.link} p-4 ml-2 mr-2`} key={item.name}>
+          <div className={navStyle.dropDown} onClick={togglSubPages}>
+            <span className='mr-2'>{item.name}</span>
+            <FontAwesomeIcon
+              icon={hide ? faCaretDown : faCaretUp}
+              color='#ffffff'
+            />
+            <div
+              className={`${navStyle.subPages} ${
+                hide ? 'd-none' : 'd-flex flex-column justify-content-start`'
+                }`}
+            >
+              {showSubPages(item.subPages)}
+            </div>
           </div>
         </div>
-      </div>
-    );
+      );
   });
 
   return (

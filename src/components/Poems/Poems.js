@@ -5,11 +5,10 @@ import classes from '../../styles/mypoems.module.scss'
 import loading from '../../styles/app.module.scss'
 import SearchPoem from '../../_components/SearchPoem'
 import axios from 'axios'
-import { useStore, useActions } from '../../store/Store'
 import { useDispatch, useSelectors } from 'react-redux'
 
 const Poems = () => {
-  
+
     const [isLoading, setIsLoading] = useState(true)
     const [poems, setPoems] = useState([])
     const [poemNr, setPoemNr] = useState(0)

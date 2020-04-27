@@ -1,8 +1,8 @@
-import React, {useContext,useEffect, useState} from "react"
+import React, { useContext, useEffect, useState } from "react"
 import Header from "./Header"
 import Footer from "./Footer"
 import classes from '../styles/index.module.scss'
-import {ThemeContext} from '../store/Store'
+import { ThemeContext } from '../store/ContextAPI'
 import ErrorBoundary from "../hoc/errorHandler"
 
 

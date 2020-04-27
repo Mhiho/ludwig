@@ -1,6 +1,6 @@
-import React, { useState, useContext} from "react"
+import React, { useState, useContext } from "react"
 import classes from '../styles/index.module.scss'
-import { ThemeContext } from '../store/Store';
+import { ThemeContext } from '../store/ContextAPI';
 
 import { NavLink } from 'react-router-dom';
 import menuStyle from '../styles/hamburger.module.scss';
@@ -40,12 +40,12 @@ const Hamburger = data => {
         {item.name}
       </NavLink>
     ) : (
-      <div key={item.name}>
-        <div className='d-flex flex-column justify-content-center'>
-          {getSubLinks(item.subPages)}
+        <div key={item.name}>
+          <div className='d-flex flex-column justify-content-center'>
+            {getSubLinks(item.subPages)}
+          </div>
         </div>
-      </div>
-    );
+      );
   });
 
   return (
@@ -56,12 +56,12 @@ const Hamburger = data => {
       <div
         className={`${menuStyle.menuHide} ${
           !data.close ? menuStyle.menuShow : ''
-        } d-flex flex-column justify-content-between`}
+          } d-flex flex-column justify-content-between`}
       >
         <div
           className={`${menuStyle.closeHide} ${
             !data.close ? menuStyle.closeShow : ''
-          } p-2`}
+            } p-2`}
           onClick={toggleMenu}
         >
           <FontAwesomeIcon icon={faTimes} color='#ffffff' />

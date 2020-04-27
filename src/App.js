@@ -4,11 +4,11 @@ import PrivateRoute from './_components/PrivateRoute';
 import { HashRouter, Route, Switch } from 'react-router-dom';
 import { MoonLoader } from 'react-spinners';
 import { css } from '@emotion/core';
-import {ThemeProvider} from './store/Store'
-import {createBrowserHistory } from 'history'
+import { ThemeProvider } from './store/ContextAPI'
+import { createBrowserHistory } from 'history'
 import classes from './styles/app.module.scss'
 import empty from '../src/assets/images/empty.png'
-
+import ErrorBoundary from './hoc/errorHandler'
 
 // const HomePage = lazy(() => import("./components/HomePage/HomePage"));
 // const Login = lazy(()=> import("./components/Login/Login"));
@@ -75,8 +75,10 @@ class App extends Component {
             >
               <Route path='/login' component={Login} />
               <Route exact path='/' component={HomePage} />
+              <ErrorBoundary>
 
-              <Route path='/books' component={Books} />
+                <Route path='/books' component={Books} />
+              </ErrorBoundary>
               <Route path='/logout' component={Logout} />
               <Route path='/poems' component={Poems} />
               <PrivateRoute path='/society' component={SocialRoom} />
