@@ -11,19 +11,20 @@ import { getAllBooks } from '../../actions/BooksAction'
 
 function Books() {
 
-
-
-
   useEffect(() => {
     dispatch(getAllBooks())
   }, [])
-  const state = useSelector(state => state.booksState);
+  const stateBooks = useSelector(state => state.booksState);
+  const stateReading = useSelector(state => state.booksReadingState)
   const dispatch = useDispatch();
+  console.log(stateReading)
   return (
     <div>
       <button onClick={() => dispatch(getAllBooks())}>+</button>
-      {state.books.map(book => (
-        <h1>{book.title}</h1>
+      {stateBooks.books.map(book => (
+        <div key={book.id}>
+          <Link to={`${book.id}/reading/${0}`}><h1>{book.title}</h1></Link>
+        </div>
       ))}
     </div>
   )

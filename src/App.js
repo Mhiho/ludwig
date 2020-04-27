@@ -37,7 +37,7 @@ const AddBookCover = lazy(() => import('./components/AddBook/AddBookCover'));
 const Writing = lazy(() => import('./components/AddBook/Writing'));
 const NewChapter = lazy(() => import('./components/AddBook/NewChapter'));
 const Book = lazy(() => import('./components/Book/Book'));
-const Reading = lazy(() => import('./components/Book/Reading'));
+const Reading = lazy(() => import('./components/Books/BookReading'));
 const Poems = lazy(() => import('./components/Poems/Poems'));
 const Logout = lazy(() => import('./components/Login/Logout'));
 const AddPoem = lazy(() => import('./components/AddPoem/AddPoem'));
