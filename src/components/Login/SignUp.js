@@ -43,7 +43,8 @@ class SignUp extends React.Component {
       }
       return response
     }).then(data => {
-      window.location.replace('/login')
+      // window.location.replace('/login')
+      return <Redirect to="/login" />
     })
   }
   handleChange = (event) => {
