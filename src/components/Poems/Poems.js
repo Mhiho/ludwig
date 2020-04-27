@@ -17,7 +17,7 @@ const Poems = () => {
     const [showEmpty, setShowEmpty] = useState(false)
 
     const fetchPoems = async () => {
-        const response = await axios.get(`${adresse}poems/all`)
+        const response = await axios.get(`${adresse}/poems/all`)
 
         const shuffled = response.data.sort(() => 0.5 - Math.random())
         const shuffledFive = shuffled.slice(0, 5)
