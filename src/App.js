@@ -45,6 +45,7 @@ const AddPoemBody = lazy(() => import('./components/AddPoem/AddPoemBody'));
 const MyPoems = lazy(() => import('./components/MyPoems/MyPoems'));
 const PoemReading = lazy(() => import('./components/Poems/PoemReading'));
 const SocialRoom = lazy(() => import('./components/SocialRoom/SocialRoom'));
+const SignUp = lazy(() => import('./components/Login/SignUp'))
 
 const override = css`
   box-sizing: content-box;
@@ -74,9 +75,9 @@ class App extends Component {
               }
             >
               <Route path='/login' component={Login} />
+              <Route path='/signup' component={SignUp} />
               <Route exact path='/' component={HomePage} />
               <ErrorBoundary>
-
                 <Route path='/books' component={Books} />
               </ErrorBoundary>
               <Route path='/logout' component={Logout} />
