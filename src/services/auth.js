@@ -11,27 +11,27 @@ const setUser = user =>
   window.localStorage.setItem("user", JSON.stringify(user))
 //
 export const login = async (email, password) => {
-    const requestOptions = {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, password })
-    };
+  const requestOptions = {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ email, password })
+  };
 
-    return await fetch(`${adresse}users/login`, requestOptions)
-        .then(response =>{
-            if(!response.ok){
-                return new Error("Błąd logowania")
-            }
-            return response.json()
-        })
-        .then(user => {
-            // login successful if there's a jwt token in the response
-            if (user.token) {
-                // store user details and jwt token in local storage to keep user logged in between page refreshes
-                setUser(user)
-            }
-            return user;
-        });
+  return await fetch(`${adresse}/users/login`, requestOptions)
+    .then(response => {
+      if (!response.ok) {
+        return new Error("Błąd logowania")
+      }
+      return response.json()
+    })
+    .then(user => {
+      // login successful if there's a jwt token in the response
+      if (user.token) {
+        // store user details and jwt token in local storage to keep user logged in between page refreshes
+        setUser(user)
+      }
+      return user;
+    });
 }
 //
 export const isLoggedIn = () => {
@@ -39,15 +39,15 @@ export const isLoggedIn = () => {
   return !!user.token
 }
 export const logout = () => {
-  const url = `${adresse}users/logout`
+  const url = `${adresse}/users/logout`
   const headers = {
-  'Authorization': 'Bearer ' + `${getUser().token}`
+    'Authorization': 'Bearer ' + `${getUser().token}`
   }
- fetch(url,{
-   method: "POST",
-   headers: headers,
- }).then(response=>{
-  return response
-}).then(data=>data)
+  fetch(url, {
+    method: "POST",
+    headers: headers,
+  }).then(response => {
+    return response
+  }).then(data => data)
   setUser({})
 }

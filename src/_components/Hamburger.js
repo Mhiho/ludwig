@@ -6,12 +6,14 @@ import { NavLink } from 'react-router-dom';
 import menuStyle from '../styles/hamburger.module.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
+import { isLoggedIn, logout } from '../services/auth'
+import { Link, Redirect } from 'react-router-dom'
 
 const Hamburger = data => {
   const logOut = () => {
+    logout()
     console.log('logOut');
   };
-
   const toggleMenu = () => {
     data.toggleMenu();
   };
@@ -74,9 +76,9 @@ const Hamburger = data => {
           </div>
           <div
             className={`${menuStyle.logOut} mt-4 pt-3 pb-3`}
-            onClick={logOut}
+            onClick={isLoggedIn === true ? logOut() : null}
           >
-            wyloguj się
+            {isLoggedIn === true ? (<span>wyloguj się</span>) : (<Link to="/login"><span>zaloguj się</span></Link>)}
           </div>
         </div>
       </div>
