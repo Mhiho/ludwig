@@ -19,17 +19,17 @@ const Header = () => {
   const isMenuHamburgerTrueFunc = () => {
     isMenuHamburgerTrue(true);
   };
-  const [hide, subPagesOnOff] = useState(true);
+  const [hide, setHide] = useState(true);
   const togglSubPages = () => {
-    subPagesOnOff(!hide);
+    setHide(!hide);
   };
 
-  const [close, menuOnOff] = useState(true);
+  const [close, setClose] = useState(true);
   const toggleMenu = () => {
     if (!isMenuHamburger) {
       isMenuHamburgerTrueFunc();
     }
-    menuOnOff(!close);
+    setClose(!close);
   };
 
   const elements = [
@@ -141,4 +141,4 @@ const Header = () => {
   );
 };
 
-export default withRouter(Header);
+export default Header;

@@ -43,8 +43,9 @@ class SignUp extends React.Component {
       }
       return response
     }).then(data => {
-      // window.location.replace('/login') // DOCELOWA ŚCIEŻKA !!!!!! redirect to login
-      window.location.replace('/ludwig/#/signUp')
+      // DOCELOWA ŚCIEŻKA !!!!!! redirect to login, można zrobić stronę do logowania z informacją żeby sprawdzić maila
+      // window.location.replace('/login') 
+      window.location.replace('/ludwig/#/login')
     })
   }
   handleChange = (event) => {
