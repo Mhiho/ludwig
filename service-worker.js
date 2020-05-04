@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/ludwig/precache-manifest.028deb40635ca1c8ac9bc768c52e20bb.js"
+  "/ludwig/precache-manifest.4994c77a02914b07593b69370e3fc5fb.js"
 );
 
 self.addEventListener('message', (event) => {
