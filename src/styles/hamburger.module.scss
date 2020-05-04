@@ -13,7 +13,7 @@ $borderColor: rgba(255, 255, 255, 0.3);
 }
 .menuHide {
   position: fixed;
-  right: -365px;
+  left: -365px;
   top: 0;
   bottom: 0;
   background-color: $black;
@@ -21,62 +21,63 @@ $borderColor: rgba(255, 255, 255, 0.3);
   animation-duration: 0.5s;
 }
 .menuShow {
-  right: 0;
+  left: 0;
   animation-name: showMenu;
   animation-duration: 0.5s;
 }
 @keyframes showMenu {
   0% {
-    right: -365px;
+    left: -365px;
   }
   100% {
-    right: 0;
+    left: 0;
   }
 }
 
 @keyframes hideMenu {
   0% {
-    right: 0;
+    left: 0;
   }
   100% {
-    right: -365px;
+    left: -365px;
   }
 }
 .closeHide {
   position: fixed;
-  top: 20px;
-  right: -365px;
+  top: 90px;
+  left: 0;
   cursor: pointer;
   animation-name: hideClose;
   animation-duration: 0.5s;
 }
 .closeShow {
-  right: 20px;
+  top: 90px;
+  left: 365px;
   animation-name: showClose;
   animation-duration: 0.5s;
 }
 @keyframes showClose {
   0% {
-    right: -365px;
+    left: 0;
   }
   100% {
-    right: 20;
+    left: 365px;
   }
 }
 
 @keyframes hideClose {
   0% {
-    right: 20;
+    left: 365px;
   }
   100% {
-    right: -365px;
+    left: 0;
   }
 }
 .links {
-  margin: 10vh;
+  margin: 95px;
 }
 .link {
-  font-size: 30px;
+  font-size: 24px;
   color: $white;
 }
 .link:hover {

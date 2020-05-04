@@ -1,27 +1,15 @@
-import { NavLink, Link, useHistory, withRouter } from "react-router-dom"
-import React, { useContext, useState } from "react"
-import classes from '../styles/index.module.scss'
-import Hamburger from './Hamburger'
-import { ThemeContext } from '../store/ContextAPI'
-import { getUser, isLoggedIn, logout } from "../services/auth"
+import { NavLink } from 'react-router-dom';
+import React, { useState } from 'react';
+import Hamburger from './Hamburger';
 import navStyle from '../styles/navigation.module.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {
-  faBars,
-  faCaretDown,
-  faCaretUp,
-  faUserCircle
-} from '@fortawesome/free-solid-svg-icons';
+import { faBars, faTimes } from '@fortawesome/free-solid-svg-icons';
 import logo from '../assets/images/logo_bookcase_white.png';
 
 const Header = () => {
   const [isMenuHamburger, isMenuHamburgerTrue] = useState(false);
   const isMenuHamburgerTrueFunc = () => {
     isMenuHamburgerTrue(true);
-  };
-  const [hide, setHide] = useState(true);
-  const togglSubPages = () => {
-    setHide(!hide);
   };
 
   const [close, setClose] = useState(true);
@@ -36,74 +24,29 @@ const Header = () => {
     {
       name: 'Książki',
       path: '/books',
-      subPages: []
+      subPages: [],
     },
     {
       name: 'Aktualności',
       path: '/news',
-      subPages: []
+      subPages: [],
     },
     {
       name: 'Felietony',
       path: '/feuilletons',
-      subPages: []
+      subPages: [],
     },
     {
       name: 'Opowiadania',
       path: '/story',
-      subPages: []
+      subPages: [],
     },
     {
       name: 'Wiersze',
       path: '/poems',
-      subPages: []
-    }
+      subPages: [],
+    },
   ];
-
-  const showSubPages = subPages => {
-    return subPages.map(page => {
-      return (
-        <NavLink
-          key={page.name}
-          to={page.path}
-          className={`${navStyle.subLink} p-2`}
-          activeClassName={navStyle.subLinkActive}
-        >
-          {page.name}
-        </NavLink>
-      );
-    });
-  };
-
-  const navItems = elements.map(item => {
-    return !item.subPages.length ? (
-      <NavLink
-        key={item.name}
-        to={item.path}
-        className={`${navStyle.link} p-4 ml-2 mr-2`}
-        activeClassName={navStyle.linkActive}
-      >
-        {item.name}
-      </NavLink>
-    ) : (
-        <div className={`${navStyle.link} p-4 ml-2 mr-2`} key={item.name}>
-          <div className={navStyle.dropDown} onClick={togglSubPages}>
-            <span className='mr-2'>{item.name}</span>
-            <FontAwesomeIcon
-              icon={hide ? faCaretDown : faCaretUp}
-              color='#ffffff'
-            />
-            <div
-              className={`${navStyle.subPages} ${
-                hide ? 'd-none' : 'd-flex flex-column justify-content-start`'
-                }`}
-            >
-              {showSubPages(item.subPages)}
-            </div>
-          </div>
-        </div>
-      );
-  });
 
   return (
     <header className={navStyle.header}>
@@ -116,23 +59,19 @@ const Header = () => {
             <img src={logo} alt='logo dream book case'></img>
           </NavLink>
         </section>
-        <section className='d-none d-lg-flex justify-content-between'>
-          {navItems}
-        </section>
-        <section className='d-flex justify-content-between'>
-          <NavLink
-            className='p-4'
-            activeClassName={navStyle.linkActive}
-            to='/profile'
-          >
-            <FontAwesomeIcon icon={faUserCircle} color='#ffffff' />
-          </NavLink>
-          <div className='p-4'>
-            <div className={navStyle.hamburger} onClick={toggleMenu}>
-              <FontAwesomeIcon icon={faBars} color='#ffffff' />
-            </div>
+        <div
+          className={`${!close ? navStyle.hamburgerOpen : navStyle.hamburger} ${
+            !isMenuHamburger ? navStyle.appear : ''
+          }`}
+          onClick={toggleMenu}
+        >
+          <div className={`${!close ? navStyle.dNone : ''}`}>
+            <FontAwesomeIcon icon={faBars} color='#ffffff' size='2x' />
           </div>
-        </section>
+          <div className={`${close ? navStyle.dNone : ''}`}>
+            <FontAwesomeIcon icon={faTimes} color='#ffffff' size='2x' />
+          </div>
+        </div>
       </div>
       <div className={`${!isMenuHamburger ? 'invisible' : ''}`}>
         <Hamburger elements={elements} close={close} toggleMenu={toggleMenu} />

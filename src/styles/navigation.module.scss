@@ -47,8 +47,121 @@ $lightBlack: rgba(0, 0, 0, 0.7);
   right: 0px;
   border-radius: 5px;
 }
-.hamburger {
+
+@mixin hamburger-default {
   cursor: pointer;
+  position: fixed;
+  top: 100px;
+  animation-duration: 0.5s;
+  z-index: 1000;
+}
+
+@media only screen and (max-width: 365px) {
+  .hamburger {
+    left: 2px;
+    animation-name: hideCloseXS;
+    @include hamburger-default;
+  }
+  .hamburgerOpen {
+    left: 300px;
+    animation-name: showCloseXS;
+    @include hamburger-default;
+  }
+
+  @keyframes showCloseXS {
+    0% {
+      left: 2px;
+    }
+    100% {
+      left: 300px;
+    }
+  }
+
+  @keyframes hideCloseXS {
+    0% {
+      left: 300px;
+    }
+    100% {
+      left: 2px;
+    }
+  }
+}
+
+@media only screen and (min-width: 366px) and (max-width: 399px) {
+  .hamburger {
+    left: 2px;
+    animation-name: hideCloseSM;
+    @include hamburger-default;
+  }
+  .hamburgerOpen {
+    left: 340px;
+    animation-name: showCloseSM;
+    @include hamburger-default;
+  }
+
+  @keyframes showCloseSM {
+    0% {
+      left: 2px;
+    }
+    100% {
+      left: 340px;
+    }
+  }
+
+  @keyframes hideCloseSM {
+    0% {
+      left: 340px;
+    }
+    100% {
+      left: 2px;
+    }
+  }
+}
+
+@media only screen and (min-width: 400px) {
+  .hamburger {
+    left: 2px;
+    animation-name: hideClose;
+    @include hamburger-default;
+  }
+  .hamburgerOpen {
+    left: 340px;
+    animation-name: showClose;
+    @include hamburger-default;
+  }
+
+  @keyframes showClose {
+    0% {
+      left: 2px;
+    }
+    100% {
+      left: 340px;
+    }
+  }
+
+  @keyframes hideClose {
+    0% {
+      left: 340px;
+    }
+    100% {
+      left: 2px;
+    }
+  }
+}
+
+.appear {
+  animation-name: appear;
+  animation-duration: 0.5s;
+  animation-iteration-count: 1;
+}
+
+@keyframes appear {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 
 .dNone {
