@@ -1,82 +1,107 @@
-import { NavLink } from 'react-router-dom';
-import React, { useState } from 'react';
-import Hamburger from './Hamburger';
-import navStyle from '../styles/navigation.module.scss';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBars, faTimes } from '@fortawesome/free-solid-svg-icons';
-import logo from '../assets/images/logo_bookcase_white.png';
+import { NavLink } from "react-router-dom";
+import React, { useState } from "react";
+import Menu from "./Menu";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import classes from "../styles/header.module.scss";
+import {
+  faBook,
+  faPenSquare,
+  faFeatherAlt,
+  faPaperPlane,
+  faStickyNote,
+} from "@fortawesome/free-solid-svg-icons";
 
 const Header = () => {
-  const [isMenuHamburger, isMenuHamburgerTrue] = useState(false);
-  const isMenuHamburgerTrueFunc = () => {
-    isMenuHamburgerTrue(true);
-  };
-
-  const [close, setClose] = useState(true);
+  const [counter, setCounter] = useState(0);
+  const [menu, setMenu] = useState(false);
   const toggleMenu = () => {
-    if (!isMenuHamburger) {
-      isMenuHamburgerTrueFunc();
-    }
-    setClose(!close);
+    setMenu(!menu);
+    console.log(menu);
   };
-
+  const [moveLine, setMoveLine] = useState(false);
+  const move = () => {
+    setMoveLine(true);
+    setTimeout(() => {
+      setMoveLine(false);
+    }, 600);
+    counter >= elements.length - 1 ? setCounter(0) : setCounter(counter + 1);
+  };
   const elements = [
     {
-      name: 'Książki',
-      path: '/books',
+      name: "Książki",
+      path: "/books",
       subPages: [],
+      icon: faBook,
     },
     {
-      name: 'Aktualności',
-      path: '/news',
+      name: "Aktualności",
+      path: "/news",
       subPages: [],
+      icon: faFeatherAlt,
     },
     {
-      name: 'Felietony',
-      path: '/feuilletons',
+      name: "Felietony",
+      path: "/feuilletons",
       subPages: [],
+      icon: faPenSquare,
     },
     {
-      name: 'Opowiadania',
-      path: '/story',
+      name: "Opowiadania",
+      path: "/story",
       subPages: [],
+      icon: faStickyNote,
     },
     {
-      name: 'Wiersze',
-      path: '/poems',
+      name: "Wiersze",
+      path: "/poems",
       subPages: [],
+      icon: faPaperPlane,
     },
   ];
-
+  const showOneIcon = (id) => {
+    return elements[id].icon;
+  };
+  console.log(showOneIcon(counter));
   return (
-    <header className={navStyle.header}>
-      <div
-        className={`${navStyle.globalNav}
-          container-fluid d-flex justify-content-between`}
-      >
-        <section className='d-flex justify-content-center'>
-          <NavLink className='p-4' to='/'>
-            <img src={logo} alt='logo dream book case'></img>
-          </NavLink>
-        </section>
-        <div
-          className={`${!close ? navStyle.hamburgerOpen : navStyle.hamburger} ${
-            !isMenuHamburger ? navStyle.appear : ''
-          }`}
-          onClick={toggleMenu}
-        >
-          <div className={`${!close ? navStyle.dNone : ''}`}>
-            <FontAwesomeIcon icon={faBars} color='#ffffff' size='2x' />
+    <React.Fragment>
+      <nav className="">
+        <div className={classes.navContainer}>
+          <div className={classes.subNavContainer}>
+            <div className={classes.menuAndMoveButton}>
+              <button
+                className={
+                  !moveLine
+                    ? `${classes.MovingButton}`
+                    : `${classes.MovingButton} ${classes.addClassMove}`
+                }
+                onClick={() => toggleMenu()}
+              ></button>
+              <div
+                className={
+                  !moveLine
+                    ? `${classes.MovingMask}`
+                    : `${classes.MovingMask} ${classes.addMoveMask}`
+                }
+              ></div>
+            </div>
+            <div>
+              <Menu elements={showOneIcon(counter)} />
+            </div>
           </div>
-          <div className={`${close ? navStyle.dNone : ''}`}>
-            <FontAwesomeIcon icon={faTimes} color='#ffffff' size='2x' />
+          <div></div>
+          <div className={classes.titleAndGoButton}>
+            <div>
+              <NavLink className="Title" to="/">
+                Ich Otchłanie
+              </NavLink>
+            </div>
+            <button className={classes.GoButton} onClick={() => move()}>
+              Go
+            </button>
           </div>
         </div>
-      </div>
-      <div className={`${!isMenuHamburger ? 'invisible' : ''}`}>
-        <Hamburger elements={elements} close={close} toggleMenu={toggleMenu} />
-      </div>
-    </header>
+      </nav>
+    </React.Fragment>
   );
 };
 

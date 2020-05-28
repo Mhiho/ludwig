@@ -1,0 +1,100 @@
+.MovingButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 48px;
+  border: 1px solid #363636;
+  animation: pulse 1.5s ease-in infinite;
+  margin: 0 20px 0 0;
+}
+@keyframes pulse {
+  0% {
+    opacity: 0;
+  }
+  20% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+.addClassMove {
+  animation: moveLeft 0.6s linear;
+}
+@keyframes moveLeft {
+  0% {
+    transform: translate(0px);
+  }
+  100% {
+    transform: translate(150px);
+  }
+}
+.MovingMask {
+  width: 10px;
+  background: #03fc77;
+  position: relative;
+  z-index: 1001;
+}
+.addMoveMask {
+  animation: unmask 0.6s linear;
+}
+@keyframes unmask {
+  0% {
+    width: 100px;
+    padding-right: 100px;
+    margin-left: 0;
+  }
+  100% {
+    width: 10px;
+    padding-right: 100px;
+    margin-left: 100px;
+  }
+}
+.GoButton {
+  display: flex;
+  color: white;
+  height: 80px;
+  position: absolute;
+  top: 0;
+  border-top: transparent;
+  border-radius: 0 0 10px 0;
+  align-items: flex-end;
+  justify-content: center;
+  &:focus {
+    outline: none;
+  }
+}
+.navContainer {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  //   flex-direction: column;
+}
+.navContainer > div {
+  display: flex;
+  width: 33.33%;
+  justify-content: center;
+  padding-right: 80px;
+  //   align-items: center;
+}
+
+.Title {
+  color: white;
+}
+.menuAndMoveButton {
+  display: flex;
+  justify-content: flex-start;
+  width: 50px;
+}
+.titleAndGoButton {
+  display: flex;
+  justify-content: space-around;
+  width: 33%;
+}
+.titleAndGoButton div {
+  width: 60%;
+}
+.subNavContainer {
+  display: flex;
+  justify-content: space-around;
+}
