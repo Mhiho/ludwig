@@ -6,6 +6,8 @@
   border: 1px solid #363636;
   animation: pulse 1.5s ease-in infinite;
   margin: 0 20px 0 0;
+  position: relative;
+  z-index: 1002;
 }
 @keyframes pulse {
   0% {
@@ -19,14 +21,14 @@
   }
 }
 .addClassMove {
-  animation: moveLeft 0.6s linear;
+  animation: moveLeft 0.5s linear;
 }
 @keyframes moveLeft {
   0% {
     transform: translate(0px);
   }
   100% {
-    transform: translate(150px);
+    transform: translate(110px);
   }
 }
 .MovingMask {
@@ -40,12 +42,10 @@
 }
 @keyframes unmask {
   0% {
-    width: 100px;
     padding-right: 100px;
     margin-left: 0;
   }
   100% {
-    width: 10px;
     padding-right: 100px;
     margin-left: 100px;
   }
