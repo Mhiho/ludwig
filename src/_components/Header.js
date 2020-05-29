@@ -10,7 +10,7 @@ import {
   faPaperPlane,
   faStickyNote,
 } from "@fortawesome/free-solid-svg-icons";
-import goButton from "../assets/sounds/goButton.mp3";
+import goButton from "../assets/sounds/goButton2.mp3";
 
 const Header = () => {
   let audio = new Audio(goButton);
