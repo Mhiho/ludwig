@@ -10,8 +10,10 @@ import {
   faPaperPlane,
   faStickyNote,
 } from "@fortawesome/free-solid-svg-icons";
+import goButton from "../assets/sounds/goButton.mp3";
 
 const Header = () => {
+  let audio = new Audio(goButton);
   const [counter, setCounter] = useState(0);
   const [menu, setMenu] = useState(false);
   const toggleMenu = () => {
@@ -20,6 +22,7 @@ const Header = () => {
   };
   const [moveLine, setMoveLine] = useState(false);
   const move = () => {
+    audio.play();
     setMoveLine(true);
     setTimeout(() => {
       setMoveLine(false);
@@ -58,8 +61,12 @@ const Header = () => {
       icon: faPaperPlane,
     },
   ];
+
   const showOneIcon = (id) => {
     return elements[id].icon;
+  };
+  const path = (id) => {
+    return elements[id].path;
   };
   console.log(showOneIcon(counter));
   return (
@@ -85,7 +92,7 @@ const Header = () => {
               ></div>
             </div>
             <div>
-              <Menu elements={showOneIcon(counter)} />
+              <Menu elements={showOneIcon(counter)} path={path(counter)} />
             </div>
           </div>
           <div></div>
