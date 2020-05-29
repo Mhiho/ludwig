@@ -30,11 +30,13 @@ const Menu = (props) => {
       <div>
         <div className="">
           <div className="">
-            <FontAwesomeIcon
-              size="3x"
-              className={classes.menuIcon}
-              icon={props.elements}
-            />
+            <NavLink to={props.path}>
+              <FontAwesomeIcon
+                size="3x"
+                className={classes.menuIcon}
+                icon={props.elements}
+              />
+            </NavLink>
           </div>
           {/* <div className="">
             {isLoggedIn() === true ? (
