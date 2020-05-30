@@ -3,12 +3,14 @@
   justify-content: center;
   align-items: center;
   height: 48px;
-  border: 1px solid #363636;
+  border: 2px solid white;
+  background: white;
+  border-radius: 2px;
   animation: pulse 1.5s ease-in infinite;
-  margin: 0 20px 0 0;
   position: relative;
   z-index: 1002;
 }
+
 @keyframes pulse {
   0% {
     opacity: 0;
@@ -28,7 +30,7 @@
     transform: translate(0px);
   }
   100% {
-    transform: translate(110px);
+    transform: translate(90px);
   }
 }
 .MovingMask {
@@ -42,26 +44,31 @@
 }
 @keyframes unmask {
   0% {
-    padding-right: 100px;
+    padding-right: 90px;
     margin-left: 0;
   }
-  100% {
-    padding-right: 100px;
-    margin-left: 100px;
+  80% {
+    padding-right: 0px;
+    margin-left: 90px;
   }
 }
 .GoButton {
   display: flex;
   color: white;
-  height: 80px;
+  height: 92px;
+  width: 24px;
   position: absolute;
   top: 0;
   border-top: transparent;
   border-radius: 0 0 10px 0;
   align-items: flex-end;
   justify-content: center;
+  color: darkslategrey;
   &:focus {
     outline: none;
+  }
+  &:hover {
+    color: #000000;
   }
 }
 .navContainer {
@@ -81,20 +88,49 @@
 .Title {
   color: white;
 }
+.Title > a:hover,
+.Title > a:visited,
+.Title > a:focus {
+  color: #daf7a6;
+}
 .menuAndMoveButton {
   display: flex;
   justify-content: flex-start;
-  width: 50px;
+  width: 80px;
 }
 .titleAndGoButton {
   display: flex;
   justify-content: space-around;
   width: 33%;
 }
-.titleAndGoButton div {
-  width: 60%;
-}
+
 .subNavContainer {
   display: flex;
   justify-content: space-around;
+}
+.titleModif {
+  width: 56px;
+  height: 48px;
+  margin-left: -50%;
+}
+.userIcon {
+  margin: 0 38px 0 0;
+}
+.menuIcon {
+  position: absolute;
+  margin-left: 130px;
+}
+@media (max-width: 600px) {
+  .navContainer > div {
+    padding-right: 0;
+  }
+  .titleModif {
+    margin-left: -120%;
+  }
+  .menuIcon {
+    margin-left: 100px;
+  }
+  .userIcon {
+    margin: 0 15px 0 20px;
+  }
 }

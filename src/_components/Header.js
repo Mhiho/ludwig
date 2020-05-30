@@ -9,17 +9,13 @@ import {
   faFeatherAlt,
   faPaperPlane,
   faStickyNote,
+  faUserCircle,
 } from "@fortawesome/free-solid-svg-icons";
 import goButton from "../assets/sounds/goButton2.mp3";
 
 const Header = () => {
   let audio = new Audio(goButton);
   const [counter, setCounter] = useState(0);
-  const [menu, setMenu] = useState(false);
-  const toggleMenu = () => {
-    setMenu(!menu);
-    console.log(menu);
-  };
   const [moveLine, setMoveLine] = useState(false);
   const move = () => {
     audio.play();
@@ -75,14 +71,18 @@ const Header = () => {
         <div className={classes.navContainer}>
           <div className={classes.subNavContainer}>
             <div className={classes.menuAndMoveButton}>
-              <button
+              <div className={classes.userIcon}>
+                <NavLink to="#">
+                  <FontAwesomeIcon icon={faUserCircle} size="3x" />
+                </NavLink>
+              </div>
+              <div
                 className={
                   !moveLine
                     ? `${classes.MovingButton}`
                     : `${classes.MovingButton} ${classes.addClassMove}`
                 }
-                onClick={() => toggleMenu()}
-              ></button>
+              ></div>
               <div
                 className={
                   !moveLine
@@ -90,20 +90,20 @@ const Header = () => {
                     : `${classes.MovingMask} ${classes.addMoveMask}`
                 }
               ></div>
-            </div>
-            <div>
-              <Menu elements={showOneIcon(counter)} path={path(counter)} />
+              <div className={classes.menuIcon}>
+                <Menu elements={showOneIcon(counter)} path={path(counter)} />
+              </div>
             </div>
           </div>
           <div></div>
           <div className={classes.titleAndGoButton}>
-            <div>
+            <div className={classes.titleModif}>
               <NavLink className="Title" to="/">
                 Ich Otchłanie
               </NavLink>
             </div>
             <button className={classes.GoButton} onClick={() => move()}>
-              Go
+              ↲
             </button>
           </div>
         </div>
