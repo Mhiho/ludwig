@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import { adresse } from "../../config";
 import classes from "../../styles/mypoems.module.scss";
 import loading from "../../styles/app.module.scss";
-import SearchPoem from "../../_components/SearchPoem";
 import axios from "axios";
 import { useDispatch, useSelectors } from "react-redux";
 
@@ -78,7 +77,6 @@ const Poems = () => {
           )}
         </div>
       </div>
-      <SearchPoem />
     </div>
   );
 };

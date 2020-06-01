@@ -10,6 +10,7 @@ import {
   faPaperPlane,
   faStickyNote,
   faUserCircle,
+  faSearch,
 } from "@fortawesome/free-solid-svg-icons";
 import goButton from "../assets/sounds/goButton2.mp3";
 
@@ -33,22 +34,16 @@ const Header = () => {
       icon: faBook,
     },
     {
-      name: "Aktualności",
-      path: "/news",
+      name: "Wyszukiwarka",
+      path: "/search",
       subPages: [],
-      icon: faFeatherAlt,
-    },
-    {
-      name: "Felietony",
-      path: "/feuilletons",
-      subPages: [],
-      icon: faPenSquare,
+      icon: faSearch,
     },
     {
       name: "Opowiadania",
       path: "/story",
       subPages: [],
-      icon: faStickyNote,
+      icon: faPenSquare,
     },
     {
       name: "Wiersze",

@@ -282,12 +282,8 @@ a:focus {
 }
 
 .dark {
-  background: rgb(217, 217, 217);
-  background: linear-gradient(
-    140deg,
-    rgba(217, 217, 217, 1) 10%,
-    rgba(38, 41, 44, 1) 300%
-  );
+  background: #ffffff;
+  background: linear-gradient(270deg, #ffffff 5%, #fff67b 100%);
   color: rgba(38, 41, 44, 1);
   min-height: 90vh;
 }
