@@ -6,15 +6,10 @@ import { NavLink } from "react-router-dom";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
-import { isLoggedIn, logout } from "../services/auth";
+
 import { Link, Redirect } from "react-router-dom";
 
 const Menu = (props) => {
-  const logOut = () => {
-    logout();
-    window.location.replace("/logout");
-  };
-
   const getSubLinks = (subLinks) => {
     return subLinks.map((link) => {
       return (
@@ -38,28 +33,6 @@ const Menu = (props) => {
               />
             </NavLink>
           </div>
-          {/* <div className="">
-            {isLoggedIn() === true ? (
-              <div className="">
-                <ul>
-                  <li>
-                    <Link to="/myProfile">Mój profil</Link>
-                  </li>
-                  <li>
-                    <Link to="/myAll">Moja twórczość</Link>
-                  </li>
-                  <li>
-                    <Link to="/mySettings">Ustawienia</Link>
-                  </li>
-                  <li onClick={() => logOut()}>wyloguj się</li>
-                </ul>
-              </div>
-            ) : (
-              <Link to="/login">
-                <span>zaloguj się</span>
-              </Link>
-            )}
-          </div> */}
         </div>
       </div>
     </React.Fragment>

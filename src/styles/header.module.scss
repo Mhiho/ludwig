@@ -71,6 +71,67 @@
     color: #000000;
   }
 }
+.GoButtonUpUp {
+  display: flex;
+  color: white;
+  background: #3c69e7;
+  height: 25px;
+  width: 20px;
+  position: absolute;
+  z-index: 1005;
+  top: 0px;
+  left: 20px;
+  border-top: transparent;
+  border-radius: 0 0 10px 0;
+  align-items: flex-end;
+  justify-content: center;
+  &:focus {
+    outline: none;
+  }
+  &:hover {
+    color: #eee;
+  }
+}
+.GoButtonUp {
+  display: flex;
+  color: darkslategray;
+  background: #fafa37;
+  height: 72px;
+  width: 25px;
+  position: absolute;
+  z-index: 1004;
+  top: 0px;
+  left: 10px;
+  border-top: transparent;
+  border-radius: 0 0 10px 0;
+  align-items: flex-end;
+  justify-content: center;
+  &:focus {
+    outline: none;
+  }
+  &:hover {
+    color: black;
+  }
+}
+.GoButtonDown {
+  display: flex;
+  color: white;
+  height: 110px;
+  width: 30px;
+  position: absolute;
+  top: 0;
+  background: #ef3054;
+  border-top: transparent;
+  border-radius: 0 0 10px 0;
+  align-items: flex-end;
+  justify-content: center;
+  &:focus {
+    outline: none;
+  }
+  &:hover {
+    color: #eee;
+  }
+}
 .navContainer {
   display: flex;
   width: 100%;
@@ -116,10 +177,19 @@
 .userIcon {
   margin: 0 38px 0 0;
 }
+.userIcon a {
+  color: black;
+}
 .menuIcon {
   position: absolute;
   margin-left: 130px;
 }
+
+.menuIcon2 > i {
+  position: absolute;
+  margin-left: 130px;
+}
+
 @media (max-width: 600px) {
   .navContainer > div {
     padding-right: 0;
@@ -128,6 +198,9 @@
     margin-left: -120%;
   }
   .menuIcon {
+    margin-left: 100px;
+  }
+  .menuIcon2 {
     margin-left: 100px;
   }
   .userIcon {
