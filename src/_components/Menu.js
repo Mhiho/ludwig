@@ -25,7 +25,7 @@ const Menu = (props) => {
       <div>
         <div className="">
           <div className="">
-            <NavLink to={props.path}>
+            <NavLink to={props.path} activeStyle={{ color: "hotpink" }}>
               <FontAwesomeIcon
                 size="3x"
                 className={classes.menuIcon}
