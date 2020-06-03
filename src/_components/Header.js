@@ -1,4 +1,4 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useHistory } from "react-router-dom";
 import React, { useState, useContext } from "react";
 import Menu from "./Menu";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -10,10 +10,11 @@ import {
   faPenSquare,
   faFeatherAlt,
   faPaperPlane,
-  faCoffee,
+  faAddressCard,
   faUserCircle,
   faSearch,
-  faDoorOpen,
+  faUserCog,
+  faUsers,
 } from "@fortawesome/free-solid-svg-icons";
 import goButton from "../assets/sounds/goButton2.mp3";
 
@@ -31,6 +32,7 @@ const Header = () => {
     counter >= elements.length - 1 ? setCounter(0) : setCounter(counter + 1);
   };
   const switchIcon = () => {
+    audio.play();
     counter2 >= elementsProfile.length - 1
       ? setCounter2(0)
       : setCounter2(counter2 + 1);
@@ -66,7 +68,7 @@ const Header = () => {
       name: "Profil",
       path: "/myProfile",
       subPages: [],
-      icon: faCoffee,
+      icon: faAddressCard,
     },
     {
       name: "Moje książki",
@@ -87,22 +89,23 @@ const Header = () => {
       icon: faPaperPlane,
     },
     {
+      name: "Społeczność",
+      path: "/society",
+      subPages: [],
+      icon: faUsers,
+    },
+    {
       name: "Ustawienia",
       path: "/settings",
       subPages: [],
-      icon: faSearch,
-    },
-    {
-      name: "Wyloguj",
-      path: "/logout",
-      icon: faDoorOpen,
+      icon: faUserCog,
     },
   ];
-
+  const history = useHistory();
   const { logged, setLogged } = useContext(ThemeContext);
   const logOut = () => {
     logout();
-    window.location.replace("/logout");
+    history.push("/logout");
     setLogged(false);
   };
   const showOneIcon = (id) => {
@@ -168,7 +171,7 @@ const Header = () => {
               {logged === true ? (
                 <React.Fragment>
                   <button className={classes.GoButtonUpUp} onClick={logOut}>
-                    <NavLink to="/logout">x</NavLink>
+                    <NavLink to="/">x</NavLink>
                   </button>
                   <button
                     className={classes.GoButtonUp}

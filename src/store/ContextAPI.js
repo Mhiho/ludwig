@@ -1,4 +1,5 @@
 import React, { createContext, useState, useEffect } from "react";
+import { isLoggedIn } from "../services/auth";
 
 const defaultState = {
   light: false,
@@ -10,7 +11,7 @@ const defaultState = {
 export const ThemeContext = createContext(defaultState);
 
 export const ThemeProvider = ({ children }) => {
-  const [logged, setLogged] = useState(false);
+  const [logged, setLogged] = useState(isLoggedIn());
   const [light, setLight] = useState(false);
   const [bookId, setBookId] = useState(null);
   const [animate, setAnimate] = useState(false);

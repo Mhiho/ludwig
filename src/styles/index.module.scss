@@ -114,53 +114,7 @@ nav {
   align-items: center;
   display: flex;
 }
-@keyframes startAnimLeft {
-  0% {
-    width: 20%;
-  }
-  100% {
-    width: 60%;
-  }
-}
 
-@keyframes startAnimRight {
-  0% {
-    width: 60%;
-  }
-  100% {
-    width: 20%;
-  }
-}
-
-@keyframes startAnim2Left {
-  0% {
-    width: 60%;
-  }
-  100% {
-    width: 20%;
-  }
-}
-@keyframes startAnim2Right {
-  0% {
-    width: 20%;
-  }
-  100% {
-    width: 60%;
-  }
-}
-
-.upLeftAnim {
-  animation: startAnimLeft 0.7s linear forwards;
-}
-.upRightAnim {
-  animation: startAnimRight 0.7s linear forwards;
-}
-.middleLeftAnim {
-  animation: startAnim2Left 0.7s linear forwards;
-}
-.middleRightAnim {
-  animation: startAnim2Right 0.7s linear forwards;
-}
 .middleLeft {
   display: flex;
   background: $accentColor;

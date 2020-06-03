@@ -180,6 +180,15 @@
 .userIcon a {
   color: black;
 }
+.userIcon svg {
+  transform: scale(0.8, 0.8);
+}
+.userIcon > div > div > div {
+  width: 60px;
+}
+.menuIcon svg {
+  transform: scale(0.8, 0.8);
+}
 .menuIcon {
   position: absolute;
   margin-left: 130px;
