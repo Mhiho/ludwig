@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "cc4607ae627d80b9126f4926eb0a081b",
+    "revision": "7f5507e9104a36c8f8dec5185200f1bd",
     "url": "/ludwig/index.html"
   },
   {
@@ -36,7 +36,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/ludwig/static/css/17.9f8ee192.chunk.css"
   },
   {
-    "revision": "daee1fbacb3015f0bda2",
+    "revision": "5976b426ca1e180081ef",
     "url": "/ludwig/static/css/18.97592da9.chunk.css"
   },
   {
@@ -116,8 +116,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/ludwig/static/js/17.73c8f45d.chunk.js"
   },
   {
-    "revision": "daee1fbacb3015f0bda2",
-    "url": "/ludwig/static/js/18.23eb510a.chunk.js"
+    "revision": "5976b426ca1e180081ef",
+    "url": "/ludwig/static/js/18.7897524e.chunk.js"
   },
   {
     "revision": "932267c8f245623d9d96",
@@ -176,8 +176,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/ludwig/static/js/main.88d7943b.chunk.js"
   },
   {
-    "revision": "39d3515cf9f61d812f49",
-    "url": "/ludwig/static/js/runtime-main.25af8391.js"
+    "revision": "5ad848680a529da8fe36",
+    "url": "/ludwig/static/js/runtime-main.ff57b876.js"
   },
   {
     "revision": "04587a4051a637e11bbcf8b954eaf2f4",
