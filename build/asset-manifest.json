@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/ludwig/static/css/main.a5bc1aa6.chunk.css",
-    "main.js": "/ludwig/static/js/main.ff46b044.chunk.js",
-    "main.js.map": "/ludwig/static/js/main.ff46b044.chunk.js.map",
+    "main.js": "/ludwig/static/js/main.88d7943b.chunk.js",
+    "main.js.map": "/ludwig/static/js/main.88d7943b.chunk.js.map",
     "runtime-main.js": "/ludwig/static/js/runtime-main.f00ff03b.js",
     "runtime-main.js.map": "/ludwig/static/js/runtime-main.f00ff03b.js.map",
     "static/css/2.4819d237.chunk.css": "/ludwig/static/css/2.4819d237.chunk.css",
@@ -67,7 +67,7 @@
     "static/js/22.63b33d98.chunk.js": "/ludwig/static/js/22.63b33d98.chunk.js",
     "static/js/22.63b33d98.chunk.js.map": "/ludwig/static/js/22.63b33d98.chunk.js.map",
     "index.html": "/ludwig/index.html",
-    "precache-manifest.c12386b4d68c4923b6b6b47d4156ff8b.js": "/ludwig/precache-manifest.c12386b4d68c4923b6b6b47d4156ff8b.js",
+    "precache-manifest.a859a3d6132a5325eac73d17fd1f1034.js": "/ludwig/precache-manifest.a859a3d6132a5325eac73d17fd1f1034.js",
     "service-worker.js": "/ludwig/service-worker.js",
     "static/css/10.74de3a17.chunk.css.map": "/ludwig/static/css/10.74de3a17.chunk.css.map",
     "static/css/11.e3563ad5.chunk.css.map": "/ludwig/static/css/11.e3563ad5.chunk.css.map",
@@ -99,6 +99,6 @@
     "static/css/2.4819d237.chunk.css",
     "static/js/2.b3b3f9c0.chunk.js",
     "static/css/main.a5bc1aa6.chunk.css",
-    "static/js/main.ff46b044.chunk.js"
+    "static/js/main.88d7943b.chunk.js"
   ]
 }
