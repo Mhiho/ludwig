@@ -33,13 +33,6 @@ class MyBooks extends Component {
     this._isMounted = false;
   }
   render() {
-    const arrayBufferToBase64 = (buffer) => {
-      var binary = "";
-      var bytes = [].slice.call(new Uint8Array(buffer));
-      bytes.forEach((b) => (binary += String.fromCharCode(b)));
-      return window.btoa(binary);
-    };
-    const base64Flag = "data:image/jpeg;base64,";
     if (this.state.isLoading === true) {
       return (
         <div
@@ -62,24 +55,23 @@ class MyBooks extends Component {
           <h2>Dodaj własną książkę!</h2>
         </Link>
         <div className={classes.Container}>
-          {this.state.books.map((book, index) => (
-            <Link
-              key={book.id}
-              className={classes.Item}
-              to={`/myBooks/${book.id}/writing`}
-            >
-              <div>
-                <img
-                  src={
-                    !book.coverUrl
-                      ? null
-                      : base64Flag + arrayBufferToBase64(book.coverUrl.data)
-                  }
-                />
-                <p>{book.title}</p>
-              </div>
-            </Link>
-          ))}
+          {this.state.books.length === 0
+            ? null
+            : this.state.books.map((book, index) => (
+                <Link
+                  key={book.id}
+                  className={classes.Item}
+                  to={`/myBooks/${book.id}/writing`}
+                >
+                  <div>
+                    <img
+                      src={!book.coverUrl ? null : `../../../${book.coverUrl}`}
+                      alt="cover"
+                    />
+                    <p>{book.title}</p>
+                  </div>
+                </Link>
+              ))}
         </div>
       </div>
     );
