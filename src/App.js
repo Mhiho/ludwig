@@ -36,7 +36,7 @@ const AddBook = lazy(() => import("./components/AddBook/AddBook"));
 const AddBookCover = lazy(() => import("./components/AddBook/AddBookCover"));
 const Writing = lazy(() => import("./components/AddBook/Writing"));
 const NewChapter = lazy(() => import("./components/AddBook/NewChapter"));
-const Book = lazy(() => import("./components/Book/Book"));
+const Sample = lazy(() => import("./components/Books/Sample"));
 const Reading = lazy(() => import("./components/Books/BookReading"));
 const Poems = lazy(() => import("./components/Poems/Poems"));
 const Logout = lazy(() => import("./components/Login/Logout"));
@@ -89,7 +89,7 @@ class App extends Component {
               <PrivateRoute path="/addBody/:id" component={AddPoemBody} />
               <PrivateRoute path="/minePoems" component={MyPoems} />
               <PrivateRoute path="/myProfile" component={MyProfile} />
-              <PrivateRoute path="/sample/:id" component={Book} />
+              <PrivateRoute path="/sample/:id" component={Sample} />
               <PrivateRoute path="/addBook" component={AddBook} />
               <PrivateRoute
                 path="/myBooks/:id/addBookCover"

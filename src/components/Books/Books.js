@@ -101,7 +101,7 @@ class Books extends Component {
               <button onClick={() => this.addOwnBook()}>
                 Dodaj swoją książkę
               </button>
-              <Link to="#">
+              <Link to={`/sample/${this.state.books[this.state.id].id}`}>
                 <img
                   className={
                     this.state.opacity
