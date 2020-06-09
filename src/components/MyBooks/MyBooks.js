@@ -4,6 +4,7 @@ import { adresse } from "../../config";
 import { getUser } from "../../services/auth";
 import classes from "../../styles/mybooks.module.scss";
 import loading from "../../styles/app.module.scss";
+import empty from "../../assets/images/empty.png";
 
 class MyBooks extends Component {
   _isMounted = false;
@@ -65,7 +66,9 @@ class MyBooks extends Component {
                 >
                   <div>
                     <img
-                      src={!book.coverUrl ? null : `../../../${book.coverUrl}`}
+                      src={
+                        book.coverUrl ? `${adresse}/${book.coverUrl}` : empty
+                      }
                       alt="cover"
                     />
                     <p>{book.title}</p>

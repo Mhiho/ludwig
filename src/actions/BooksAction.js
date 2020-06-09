@@ -1,42 +1,42 @@
-import axios from '../axiosInstance'
-import { adresse } from '../config'
+import axios from "../axiosInstance";
+import { adresse } from "../config";
 
 export const BooksActionTypes = {
-    FETCH_ALL_BOOKS: 'FETCH_ALL_BOOKS',
-    SELECT_BOOK: 'SELECT_BOOK',
-    TOGGLE_BOOK: 'TOGGLE_BOOK'
-    //   DELETE = 'DELETE',
-    //   ADD = 'ADD',
-    //   CHANGE = 'CHANGE'
-}
+  FETCH_ALL_BOOKS: "FETCH_ALL_BOOKS",
+  SELECT_BOOK: "SELECT_BOOK",
+  TOGGLE_BOOK: "TOGGLE_BOOK",
+  //   DELETE = 'DELETE',
+  //   ADD = 'ADD',
+  //   CHANGE = 'CHANGE'
+};
 
 export const getAllBooks = () => {
-    return async (dispatch) => {
-        try {
-            const response = await axios.get(`${adresse}/books/all`);
-            dispatch({
-                type: BooksActionTypes.FETCH_ALL_BOOKS,
-                books: response.data,
-            });
-        } catch (err) {
-            console.error('coooos' + err);
-        }
-    };
+  return async (dispatch) => {
+    try {
+      const response = await axios.get(`${adresse}/books/all`);
+      dispatch({
+        type: BooksActionTypes.FETCH_ALL_BOOKS,
+        books: response.data,
+      });
+    } catch (err) {
+      console.error(err);
+    }
+  };
 };
 
 export const selectBook = (id) => {
-    return {
-        type: BooksActionTypes.SELECT_BOOK,
-        id: id
-    }
-}
+  return {
+    type: BooksActionTypes.SELECT_BOOK,
+    id: id,
+  };
+};
 
 export const toggleBook = (id) => {
-    return {
-        type: BooksActionTypes.TOGGLE,
-        id: id
-    }
-}
+  return {
+    type: BooksActionTypes.TOGGLE,
+    id: id,
+  };
+};
 
 // export const deleteBook = (id) => {
 //   return {

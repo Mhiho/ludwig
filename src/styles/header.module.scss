@@ -185,6 +185,11 @@
 .userIcon a:hover {
   color: black;
 }
+.menuIcon a:visited,
+.menuIcon a:focus,
+.menuIcon a:hover {
+  color: white;
+}
 .userIcon svg {
   transform: scale(0.8, 0.8);
 }
@@ -198,13 +203,6 @@
 .menuIcon {
   position: absolute;
   margin-left: 130px;
-}
-.menuIcon svg,
-.menuIcon svg:visited,
-.menuIcon svg:focus,
-.menuIcon svg:hover,
-.menuIcon svg:active {
-  color: white;
 }
 
 @media (max-width: 600px) {
