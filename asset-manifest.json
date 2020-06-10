@@ -1,10 +1,10 @@
 {
   "files": {
     "main.css": "/ludwig/static/css/main.0a015705.chunk.css",
-    "main.js": "/ludwig/static/js/main.902d43df.chunk.js",
-    "main.js.map": "/ludwig/static/js/main.902d43df.chunk.js.map",
-    "runtime-main.js": "/ludwig/static/js/runtime-main.ad7ead6b.js",
-    "runtime-main.js.map": "/ludwig/static/js/runtime-main.ad7ead6b.js.map",
+    "main.js": "/ludwig/static/js/main.70f8d910.chunk.js",
+    "main.js.map": "/ludwig/static/js/main.70f8d910.chunk.js.map",
+    "runtime-main.js": "/ludwig/static/js/runtime-main.962c2d4c.js",
+    "runtime-main.js.map": "/ludwig/static/js/runtime-main.962c2d4c.js.map",
     "static/css/2.4819d237.chunk.css": "/ludwig/static/css/2.4819d237.chunk.css",
     "static/js/2.90a2d857.chunk.js": "/ludwig/static/js/2.90a2d857.chunk.js",
     "static/js/2.90a2d857.chunk.js.map": "/ludwig/static/js/2.90a2d857.chunk.js.map",
@@ -39,14 +39,14 @@
     "static/js/12.d433e8fc.chunk.js": "/ludwig/static/js/12.d433e8fc.chunk.js",
     "static/js/12.d433e8fc.chunk.js.map": "/ludwig/static/js/12.d433e8fc.chunk.js.map",
     "static/css/13.e3563ad5.chunk.css": "/ludwig/static/css/13.e3563ad5.chunk.css",
-    "static/js/13.a7670ad4.chunk.js": "/ludwig/static/js/13.a7670ad4.chunk.js",
-    "static/js/13.a7670ad4.chunk.js.map": "/ludwig/static/js/13.a7670ad4.chunk.js.map",
+    "static/js/13.f3ff2987.chunk.js": "/ludwig/static/js/13.f3ff2987.chunk.js",
+    "static/js/13.f3ff2987.chunk.js.map": "/ludwig/static/js/13.f3ff2987.chunk.js.map",
     "static/css/14.c3e59838.chunk.css": "/ludwig/static/css/14.c3e59838.chunk.css",
     "static/js/14.0560e5b9.chunk.js": "/ludwig/static/js/14.0560e5b9.chunk.js",
     "static/js/14.0560e5b9.chunk.js.map": "/ludwig/static/js/14.0560e5b9.chunk.js.map",
     "static/css/15.c3e59838.chunk.css": "/ludwig/static/css/15.c3e59838.chunk.css",
-    "static/js/15.b18cb049.chunk.js": "/ludwig/static/js/15.b18cb049.chunk.js",
-    "static/js/15.b18cb049.chunk.js.map": "/ludwig/static/js/15.b18cb049.chunk.js.map",
+    "static/js/15.512c0206.chunk.js": "/ludwig/static/js/15.512c0206.chunk.js",
+    "static/js/15.512c0206.chunk.js.map": "/ludwig/static/js/15.512c0206.chunk.js.map",
     "static/css/16.9f8ee192.chunk.css": "/ludwig/static/css/16.9f8ee192.chunk.css",
     "static/js/16.33e35d76.chunk.js": "/ludwig/static/js/16.33e35d76.chunk.js",
     "static/js/16.33e35d76.chunk.js.map": "/ludwig/static/js/16.33e35d76.chunk.js.map",
@@ -67,7 +67,7 @@
     "static/js/22.2a9f2db3.chunk.js": "/ludwig/static/js/22.2a9f2db3.chunk.js",
     "static/js/22.2a9f2db3.chunk.js.map": "/ludwig/static/js/22.2a9f2db3.chunk.js.map",
     "index.html": "/ludwig/index.html",
-    "precache-manifest.e5ca9419fad7df25516456adf52ffa2c.js": "/ludwig/precache-manifest.e5ca9419fad7df25516456adf52ffa2c.js",
+    "precache-manifest.52b85cfb465d5ebe6c791a4e13b2970a.js": "/ludwig/precache-manifest.52b85cfb465d5ebe6c791a4e13b2970a.js",
     "service-worker.js": "/ludwig/service-worker.js",
     "static/css/10.74de3a17.chunk.css.map": "/ludwig/static/css/10.74de3a17.chunk.css.map",
     "static/css/11.e3563ad5.chunk.css.map": "/ludwig/static/css/11.e3563ad5.chunk.css.map",
@@ -95,10 +95,10 @@
     "static/media/goodbye.jpg": "/ludwig/static/media/goodbye.dd0d420e.jpg"
   },
   "entrypoints": [
-    "static/js/runtime-main.ad7ead6b.js",
+    "static/js/runtime-main.962c2d4c.js",
     "static/css/2.4819d237.chunk.css",
     "static/js/2.90a2d857.chunk.js",
     "static/css/main.0a015705.chunk.css",
-    "static/js/main.902d43df.chunk.js"
+    "static/js/main.70f8d910.chunk.js"
   ]
 }
