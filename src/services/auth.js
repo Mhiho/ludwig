@@ -8,7 +8,7 @@ export const getUser = () =>
     : {};
 const setUser = (user) =>
   window.localStorage.setItem("user", JSON.stringify(user));
-//
+
 export const login = async (email, password) => {
   const requestOptions = {
     method: "POST",

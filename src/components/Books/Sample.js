@@ -4,25 +4,36 @@ import { Link } from "react-router-dom";
 import classes from "../../styles/books.module.scss";
 import axios from "../../axiosInstance";
 import loading from "../../styles/app.module.scss";
-
+import { getUser } from "../../services/auth";
 class Sample extends Component {
   state = {
     id: null,
     book: {},
     loading: true,
+    purchased: false,
   };
   async componentDidMount() {
     let { id } = await this.props.match.params;
     this.setState({ id: id });
+    const url = `${adresse}/books/gatePurchased/${this.state.id}`;
+    const headers = {
+      "Content-Type": "application/json",
+      Authorization: "Bearer " + getUser().token,
+    };
+    const responseGate = await axios.get(url, {
+      headers: headers,
+    });
+    this.setState({ purchased: responseGate.data.flag });
     const response = await axios.get(
       `${adresse}/books/sample/${this.state.id}`
     );
-    console.log(response);
-    this.setState({ book: response.data }, () =>
-      this.setState({ loading: false })
-    );
+
+    this.setState({ book: response.data }, () => {
+      this.setState({ loading: false });
+    });
   }
   render() {
+    console.log(this.state.purchased);
     if (this.state.loading) {
       return (
         <div
@@ -39,7 +50,6 @@ class Sample extends Component {
         </div>
       );
     }
-    console.log(this.state.book);
     return (
       <div>
         <div>
@@ -47,7 +57,10 @@ class Sample extends Component {
             ? this.state.book.sample
             : "Autor nie dodał jeszcze próbki swojej książki"}
         </div>
-        <Link to={`/${this.state.id}/reading/${0}`}>
+
+        <Link
+          to={this.state.purchased ? `/${this.state.id}/reading/${0}` : "/"}
+        >
           <button className={classes.btnChaptitle}>Czytaj dalej</button>
         </Link>
       </div>
