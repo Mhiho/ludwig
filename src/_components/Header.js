@@ -120,7 +120,6 @@ const Header = () => {
   const path2 = (id) => {
     return elementsProfile[id].path;
   };
-  console.log(showOneIcon(counter));
   return (
     <React.Fragment>
       <nav className="">

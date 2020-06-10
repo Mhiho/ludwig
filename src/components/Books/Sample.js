@@ -33,7 +33,6 @@ class Sample extends Component {
     });
   }
   render() {
-    console.log(this.state.purchased);
     if (this.state.loading) {
       return (
         <div
