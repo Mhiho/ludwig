@@ -5,16 +5,27 @@ import classes from "../../styles/books.module.scss";
 import axios from "../../axiosInstance";
 import loading from "../../styles/app.module.scss";
 import { getUser } from "../../services/auth";
+import { connect } from "react-redux";
+import { fetchCheckpoints } from "../../actions/CheckpointReadingAction";
+
 class Sample extends Component {
   state = {
     id: null,
     book: {},
     loading: true,
     purchased: false,
+    chapterNr: null,
   };
   async componentDidMount() {
+    await this.props.fetchCheckpoints();
     let { id } = await this.props.match.params;
     this.setState({ id: id });
+    const book = this.props.checkpoints.checkpoints.find(
+      (book) => book.bookId === this.state.id
+    );
+    const chapterNr = book.checkpointCh;
+    this.setState({ chapterNr });
+    console.log(this.state.chapterNr);
     const url = `${adresse}/books/gatePurchased/${this.state.id}`;
     const headers = {
       "Content-Type": "application/json",
@@ -58,7 +69,11 @@ class Sample extends Component {
         </div>
 
         <Link
-          to={this.state.purchased ? `/${this.state.id}/reading/${0}` : "/"}
+          to={
+            this.state.purchased
+              ? `/${this.state.id}/reading/${this.state.chapterNr}`
+              : "/"
+          }
         >
           <button className={classes.btnChaptitle}>Czytaj dalej</button>
         </Link>
@@ -66,4 +81,15 @@ class Sample extends Component {
     );
   }
 }
-export default Sample;
+
+const mapStateToProps = (state) => ({
+  checkpoints: state.checkpointsReadingState,
+});
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    fetchCheckpoints: () => dispatch(fetchCheckpoints()),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Sample);

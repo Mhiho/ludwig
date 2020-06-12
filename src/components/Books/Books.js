@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import { useStore } from "../../store/ContextAPI";
-import axios from "axios";
+import axios from "../../axiosInstance";
 import { Link } from "react-router-dom";
 import { adresse } from "../../config";
 import classes from "../../styles/books.module.scss";
