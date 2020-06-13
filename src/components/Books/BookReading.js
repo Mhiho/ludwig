@@ -21,40 +21,48 @@ class BookReading extends Component {
       chapterNr: null,
       loading: true,
       position: 0,
-      limit: 0,
+      limit: 0.1,
       currentPosition: null,
       currentChapter: null,
+      bodyHeight: null,
     };
   }
   async componentDidMount() {
-    await this.props.fetchCheckpoints();
     let { id } = await this.props.match.params;
-    this.setState({ id: id }, () => {
-      const book = this.props.checkpoints.checkpoints.find(
-        (book) => book.bookId === id
-      );
-      this.setState({
-        chapterNr: book.checkpointCh,
-        position: book.checkpointA,
-      });
-    });
-    await this.props.fetchReading(this.state.id);
-    this.setState({ loading: false });
-    setInterval(this.setPosition, 10000);
 
-    const limit = (await this.myRef.current.offsetTop) - 300;
-    this.setState({ limit: limit });
-  }
-  setPosition = async () => {
+    this.setState({ id: id });
+
+    await this.props.fetchCheckpoints();
+    const book = await this.props.checkpoints.checkpoints.find(
+      (book) => book.bookId === id
+    );
+
+    this.setState({ loading: false }, () => {
+      this.setState(
+        {
+          chapterNr: book.checkpointCh,
+          currentPosition: book.checkpointA,
+        },
+        () => {
+          this.props.fetchReading(this.state.id);
+        }
+      );
+    });
+
+    setInterval(this.setPosition, 10000);
+    document.getElementsByTagName("body")[0].addEventListener("load", () => {
+      this.setState({ limit: this.myRef.current.offsetTop });
+    });
     const sm = new ScrollManager();
-    const position = sm.getScrollPosition().scrollPosition;
+    window.addEventListener("window-scroll", (e) => {
+      let scroll = e.detail.scrollPosition;
+      this.setState({ limit: this.myRef.current.offsetTop });
+      this.setState({ currentPosition: (scroll / this.state.limit) * 100 });
+    });
+  }
+
+  setPosition = async () => {
     const url = `${adresse}/users/updateReadingBook/${this.state.id}`;
-    const config = {
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: "Bearer " + getUser().token,
-      },
-    };
     await axios({
       method: "put",
       url: url,
@@ -65,16 +73,17 @@ class BookReading extends Component {
       data: JSON.stringify({
         bookId: this.state.id,
         checkpointCh: this.state.chapterNr,
-        checkpointA: (position / this.state.limit) * 100,
+        checkpointA: Math.round(this.state.currentPosition),
       }),
-    });
-    this.setState({
-      currentPosition: (position / this.state.limit) * 100,
     });
   };
 
+  changeChapter(id) {
+    this.setState({ chapterNr: id });
+  }
+
+  // componentDidUpdate(prevProps, prevState) {}
   render() {
-    let percent = (this.state.position / this.state.limit) * 100;
     const { book } = this.props;
     if (book.reading.length === 0) {
       return (
@@ -92,18 +101,22 @@ class BookReading extends Component {
         </div>
       );
     }
+
     return (
       <div>
         <ProgressBar
           className={`${classes.progressBar}`}
-          now={percent}
+          now={this.state.currentPosition}
           variant="warning"
         />
         <div>
           {book.reading.chapters.length > 0
             ? book.reading.chapters.map((chapter, index) => (
-                <button className={classes.btnChaptitle}>
-                  {chapter.chapTitle}
+                <button
+                  onClick={() => this.changeChapter(index)}
+                  className={classes.btnChaptitle}
+                >
+                  {chapter ? chapter.chapTitle : ""}
                 </button>
               ))
             : null}
@@ -116,7 +129,9 @@ class BookReading extends Component {
               this.state.chapterNr
             ].akapits.map((akapit, index) => <p>{akapit}</p>)
           : null}
-        <div ref={this.myRef}>.</div>
+        <div className="Ref" ref={this.myRef}>
+          .
+        </div>
       </div>
     );
   }
