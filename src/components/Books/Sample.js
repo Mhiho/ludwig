@@ -19,13 +19,20 @@ class Sample extends Component {
   async componentDidMount() {
     await this.props.fetchCheckpoints();
     let { id } = await this.props.match.params;
+    console.log(id);
     this.setState({ id: id });
-    const book = this.props.checkpoints.checkpoints.find(
+    const book = await this.props.checkpoints.checkpoints.find(
       (book) => book.bookId === this.state.id
     );
-    const chapterNr = book.checkpointCh;
-    this.setState({ chapterNr });
+    console.log(book);
+    // const chapterNr = await book.checkpointCh;
+    if (book) {
+      this.setState({ chapterNr: book.checkpointCh });
+    } else {
+      this.setState({ chpaterNr: 0 });
+    }
     console.log(this.state.chapterNr);
+    console.log(this.book);
     const url = `${adresse}/books/gatePurchased/${this.state.id}`;
     const headers = {
       "Content-Type": "application/json",
@@ -63,7 +70,7 @@ class Sample extends Component {
     return (
       <div>
         <div>
-          {this.state.book !== undefined
+          {this.state.book
             ? this.state.book.sample
             : "Autor nie dodał jeszcze próbki swojej książki"}
         </div>

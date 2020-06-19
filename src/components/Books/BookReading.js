@@ -1,4 +1,3 @@
-//do przerobienia, kod z PoemReading
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import classes from "../../styles/mypoems.module.scss";
@@ -41,7 +40,7 @@ class BookReading extends Component {
       this.setState(
         {
           chapterNr: book.checkpointCh,
-          currentPosition: book.checkpointA,
+          position: book.checkpointA,
         },
         () => {
           this.props.fetchReading(this.state.id);
@@ -50,15 +49,16 @@ class BookReading extends Component {
     });
 
     setInterval(this.setPosition, 10000);
-    document.getElementsByTagName("body")[0].addEventListener("load", () => {
-      this.setState({ limit: this.myRef.current.offsetTop });
-    });
     const sm = new ScrollManager();
     window.addEventListener("window-scroll", (e) => {
       let scroll = e.detail.scrollPosition;
       this.setState({ limit: this.myRef.current.offsetTop });
       this.setState({ currentPosition: (scroll / this.state.limit) * 100 });
     });
+    setTimeout(() => {
+      this.setState({ limit: this.myRef.current.offsetTop });
+      window.scrollTo(0, (this.state.position * this.state.limit) / 100);
+    }, 400);
   }
 
   setPosition = async () => {
@@ -82,8 +82,13 @@ class BookReading extends Component {
     this.setState({ chapterNr: id });
   }
 
-  // componentDidUpdate(prevProps, prevState) {}
+  click = () => {
+    window.scrollTo(0, (this.state.position * this.state.limit) / 100);
+  };
+  // 4889
+  componentDidUpdate(prevProps, prevState) {}
   render() {
+    console.log(this.state.position, this.state.limit);
     const { book } = this.props;
     if (book.reading.length === 0) {
       return (
@@ -110,25 +115,23 @@ class BookReading extends Component {
           variant="warning"
         />
         <div>
-          {book.reading.chapters.length > 0
-            ? book.reading.chapters.map((chapter, index) => (
-                <button
-                  onClick={() => this.changeChapter(index)}
-                  className={classes.btnChaptitle}
-                >
-                  {chapter ? chapter.chapTitle : ""}
-                </button>
-              ))
-            : null}
+          <button onClick={() => this.click()}>klikkk</button>
+          {book.reading.chapters &&
+            book.reading.chapters.map((chapter, index) => (
+              <button
+                onClick={() => this.changeChapter(index)}
+                className={classes.btnChaptitle}
+              >
+                {chapter.chapTitle}
+              </button>
+            ))}
         </div>
-        {book.reading.chapters.length > 0
-          ? book.reading.chapters[this.state.chapterNr].chapTitle
-          : null}
-        {book.reading.chapters.length > 0
-          ? book.reading.chapters[
-              this.state.chapterNr
-            ].akapits.map((akapit, index) => <p>{akapit}</p>)
-          : null}
+        {book.reading.chapters &&
+          book.reading.chapters[this.state.chapterNr].chapTitle}
+        {book.reading.chapters &&
+          book.reading.chapters[
+            this.state.chapterNr
+          ].akapits.map((akapit, index) => <p>{akapit}</p>)}
         <div className="Ref" ref={this.myRef}>
           .
         </div>
