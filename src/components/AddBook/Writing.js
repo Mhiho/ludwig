@@ -4,13 +4,11 @@ import { getUser } from "../../services/auth";
 import classesRoot from "../../styles/index.module.scss";
 import classes from "../../styles/addBook.module.scss";
 import { Link, Redirect } from "react-router-dom";
-import empty from "../../assets/images/empty.png";
 import update from "immutability-helper";
 
-const base64Flag = "data:image/jpeg;base64,";
 class Writing extends Component {
   state = {
-    book: [{ title: "", chapters: [], url: { data: [] }, categories: [] }],
+    book: {},
     id: "",
     img: "",
     changeGenre: false,
@@ -19,15 +17,6 @@ class Writing extends Component {
     deleted: false,
   };
 
-  arrayBufferToBase64(buffer) {
-    var binary = "";
-    var bytes = new Uint8Array(buffer);
-    var len = bytes.byteLength;
-    for (var i = 0; i < len; i++) {
-      binary += String.fromCharCode(bytes[i]);
-    }
-    return window.btoa(binary);
-  }
   componentDidMount() {
     const headers = {
       "Content-Type": "application/json",
@@ -52,7 +41,7 @@ class Writing extends Component {
     this.setState({ genre: event.target.value }, () => {
       const headers = {
         "Content-Type": "application/json",
-        Authorization: "Bearer " + `${getUser().token}`,
+        Authorization: "Bearer " + getUser().token,
       };
       let { id } = this.props.match.params;
       this.setState({ id: id }, () => {
@@ -77,15 +66,10 @@ class Writing extends Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    if (
-      prevState.book[0].genre != this.state.genre &&
-      this.state.genre !== ""
-    ) {
+    if (prevState.book.genre !== this.state.genre && this.state.genre !== "") {
       this.setState({
         book: update(this.state.book, {
-          [0]: {
-            genre: { $set: this.state.genre },
-          },
+          genre: { $set: this.state.genre },
         }),
       });
     }
@@ -93,7 +77,7 @@ class Writing extends Component {
   deleteBook = (id) => {
     const headers = {
       "Content-Type": "application/json",
-      Authorization: "Bearer " + `${getUser().token}`,
+      Authorization: "Bearer " + getUser().token,
     };
 
     fetch(`${adresse}books/mine/deleteBook/${id}`, {
@@ -109,26 +93,15 @@ class Writing extends Component {
       });
   };
   render() {
-    let imgStr = "";
-    this.state.book[0].url != undefined
-      ? (imgStr = this.arrayBufferToBase64(this.state.book[0].url.data))
-      : (imgStr = "");
-
     return (
       <div className={classes.BackgroundForBook}>
-        <h2>{this.state.book[0].title}</h2>
-        {this.state.book[0].url != undefined ? (
-          <div className={classes.writingContainer}>
-            <img src={base64Flag + imgStr} />
-          </div>
-        ) : (
-          <div className={classes.writingContainer}>
-            <img src={empty} />
-          </div>
-        )}
+        <h2>{this.state.book.title}</h2>
         <div className={classes.writingContainer}>
-          <p>{this.state.book[0].genre}</p>{" "}
-          <button onClick={this.chagnerGenreHandler.bind(this)}>Edytuj</button>{" "}
+          <img src={`${adresse}/${this.state.book.coverUrl}`} alt="cover" />
+        </div>
+        <div className={classes.writingContainer}>
+          <p>{this.state.book.genre}</p>{" "}
+          <button onClick={() => this.chagnerGenreHandler()}>Edytuj</button>{" "}
           {this.state.changeGenre ? (
             <div>
               <select
@@ -159,34 +132,30 @@ class Writing extends Component {
           ) : null}{" "}
         </div>
         <div className={classes.writingContainer}>
-          {this.state.book[0].categories.map((cat) => (
-            <span>cat</span>
-          ))}
+          {this.state.book.categories &&
+            this.state.book.categories.map((cat) => <span>cat</span>)}
         </div>
         <div className={classes.writingContainer}>
-          {this.state.book[0].description}
+          {this.state.book.description}
         </div>
-        <div className={classes.writingContainer}>
-          {this.state.book[0].sample}
-        </div>
-        <div className={classes.writingContainer}>
-          {this.state.book[0].year}
-        </div>
+        <div className={classes.writingContainer}>{this.state.book.sample}</div>
+        <div className={classes.writingContainer}>{this.state.book.year}</div>
         <div>
           <h3>Rozdziały</h3>
-          {this.state.book[0].chapters.map((chapter, index) => (
+          {this.state.book.chapters &&
+            this.state.book.chapters.map((chapter, index) => (
+              <Link
+                key={index}
+                to={`/myBooks/${this.state.id}/chapters/${index}`}
+              >
+                <button className={classesRoot.typicalBtn}>
+                  {chapter.chapTitle}
+                </button>
+              </Link>
+            ))}
+          {this.state.book.chapters && this.state.book.chapters.length > 0 ? (
             <Link
-              key={index}
-              to={`/myBooks/${this.state.id}/chapters/${index}`}
-            >
-              <button className={classesRoot.typicalBtn}>
-                {chapter.chaptitle}
-              </button>
-            </Link>
-          ))}
-          {this.state.book[0].chapters.length > 0 ? (
-            <Link
-              to={`/myBooks/${this.state.id}/chapters/${this.state.book[0].chapters.length}`}
+              to={`/myBooks/${this.state.id}/chapters/${this.state.book.chapters.length}`}
             >
               <button>Nowy rozdział</button>
             </Link>

@@ -48,7 +48,7 @@ class BookReading extends Component {
       );
     });
 
-    setInterval(this.setPosition, 10000);
+    setInterval(this.setPosition, 30000);
     const sm = new ScrollManager();
     window.addEventListener("window-scroll", (e) => {
       let scroll = e.detail.scrollPosition;
@@ -58,7 +58,7 @@ class BookReading extends Component {
     setTimeout(() => {
       this.setState({ limit: this.myRef.current.offsetTop });
       window.scrollTo(0, (this.state.position * this.state.limit) / 100);
-    }, 400);
+    }, 800);
   }
 
   setPosition = async () => {

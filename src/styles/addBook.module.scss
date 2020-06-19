@@ -1,122 +1,122 @@
 label {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    width: 80%;
-    margin: 5px 10% 5px 10%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  width: 80%;
+  margin: 5px 10% 5px 10%;
 }
 label span {
-    width: 120px;
+  width: 120px;
 }
-label input,textarea, select {
-    display: flex;
-    justify-content: center;
-    align-items: center; 
-    width: 50%;
-    margin: 5px 5px 5px 5px;
+label input,
+textarea,
+select {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50%;
+  margin: 5px 5px 5px 5px;
 }
 .Category {
-    background: lime;
-    color: black;
-    margin: 4px 4px 4px 0;
+  background: lime;
+  margin: 4px 4px 4px 0;
 }
 strong {
-    cursor: pointer;
-    color: pink;
+  cursor: pointer;
+  color: pink;
 }
 .categoriesContainer {
-    height: 40px;
-    width: 100%;
-    margin-left: 10%;
+  height: 40px;
+  width: 100%;
+  margin-left: 10%;
 }
 img {
-    display: flex;
-    justify-content: center;
-    align-items: centers;
-    max-width: 1200px;
+  display: flex;
+  justify-content: center;
+  align-items: centers;
+  max-width: 1200px;
 }
 
 // do addBookCover
 
 .frameContainer {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
-.fileAdd{
-    border-bottom: 4px solid tan;
-    border-right: 4px solid tan;
-    border-top: 1px solid tan;
-    border-left: 1px solid tan;
-    padding: 10px;
-    margin: 16px 4px 16px 0;
-    cursor: pointer;
-    border-radius: 3px;
-  
+.fileAdd {
+  border-bottom: 4px solid tan;
+  border-right: 4px solid tan;
+  border-top: 1px solid tan;
+  border-left: 1px solid tan;
+  padding: 10px;
+  margin: 16px 4px 16px 0;
+  cursor: pointer;
+  border-radius: 3px;
 }
 .inptsContainer {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .fileSbmt {
-    height: 54px;
-    width: 100px;
-    font-weight: 900;
+  height: 54px;
+  width: 100px;
+  font-weight: 900;
 }
 .buttonContainer {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 // writing
 
 .writingContainer {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .writingContainer img {
-    width: 100px;
-    height: 150px;
+  width: 100px;
+  height: 150px;
 }
 h2 {
-    white-space: pre;
+  white-space: pre;
 }
 
 //newChapter
 .newChapContainer {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .delAkapit {
-    cursor: pointer;
-    color: red;
-    font-weight: 900;
-    font-size: 1.5em;
-    margin: 2px 2px 2px 2px;
+  cursor: pointer;
+  color: red;
+  font-weight: 900;
+  font-size: 1.5em;
+  margin: 2px 2px 2px 2px;
 }
-.oneUp{
-    cursor: pointer;
-    color: navy;
-    font-size: 1.5em;
-    margin: 2px 2px 2px 2px;
+.oneUp {
+  cursor: pointer;
+  color: navy;
+  font-size: 1.5em;
+  margin: 2px 2px 2px 2px;
 }
-.oneDown{
-    cursor: pointer;
-    color: green;
-    font-size: 1.5em;
-    margin: 2px 2px 2px 2px;
+.oneDown {
+  cursor: pointer;
+  color: green;
+  font-size: 1.5em;
+  margin: 2px 2px 2px 2px;
 }
 
 .BackgroundForBook {
-    background: #363b3f
+  background: #363b3f;
+  color: white;
 }
