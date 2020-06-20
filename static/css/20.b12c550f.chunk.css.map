@@ -1,0 +1,1 @@
+{"version":3,"sources":["profile.module.scss"],"names":[],"mappings":"AAAA,8BACE,WAAY,CACZ,YAAa,CACb,iBAAkB","file":"20.b12c550f.chunk.css","sourcesContent":[".Container img {\n  width: 150px;\n  height: 150px;\n  border-radius: 50%;\n}\n"]}
