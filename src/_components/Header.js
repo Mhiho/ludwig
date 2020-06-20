@@ -3,8 +3,9 @@ import React, { useState, useContext } from "react";
 import Menu from "./Menu";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import classes from "../styles/header.module.scss";
-import { isLoggedIn, logout } from "../services/auth";
+import { isLoggedIn, logout, getUser } from "../services/auth";
 import { ThemeContext } from "../store/ContextAPI";
+import { adresse } from "../config";
 import {
   faBook,
   faPenSquare,
@@ -120,6 +121,8 @@ const Header = () => {
   const path2 = (id) => {
     return elementsProfile[id].path;
   };
+  const user = getUser();
+  console.log(user);
   return (
     <React.Fragment>
       <nav className="">
@@ -163,7 +166,7 @@ const Header = () => {
           <div className={classes.titleAndGoButton}>
             <div className={classes.titleModif}>
               <NavLink className="Title" to="/">
-                Ich Otchłanie
+                IO
               </NavLink>
             </div>
             <div className={classes.GoButton}>

@@ -34,6 +34,7 @@ class SocialRoom extends Component {
           ? null
           : this.state.users.map((user, index) => (
               <div>
+                <img src={`${adresse}/${user.thumbnailUrl}`} alt="userPhoto" />
                 <h3>{user.name}</h3>
               </div>
             ))}
