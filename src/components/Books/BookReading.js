@@ -16,7 +16,7 @@ class BookReading extends Component {
     this.myRef = React.createRef();
     this.state = {
       id: null,
-      checkpoints: [],
+      checkpoints: this.props.checkpoints,
       chapterNr: null,
       loading: true,
       position: 0,
@@ -26,41 +26,48 @@ class BookReading extends Component {
       bodyHeight: null,
     };
   }
-  async componentDidMount() {
-    let { id } = await this.props.match.params;
+  componentDidMount() {
+    this.props.fetchCheckpoints();
+    this.forceUpdate();
+    let { id } = this.props.match.params;
+    this.props.fetchReading(id);
 
-    this.setState({ id: id });
+    this.setState({ id: id }, () => {});
 
-    await this.props.fetchCheckpoints();
-    const book = await this.props.checkpoints.checkpoints.find(
-      (book) => book.bookId === id
-    );
-
-    this.setState({ loading: false }, () => {
+    // if (book) {
+    setTimeout(() => {
+      const book = this.props.checkpoints.checkpoints.find(
+        (book) => book.bookId === this.state.id
+      );
       this.setState(
         {
           chapterNr: book.checkpointCh,
           position: book.checkpointA,
         },
         () => {
-          this.props.fetchReading(this.state.id);
+          setTimeout(() => {
+            this.setState({
+              limit: this.myRef.current.offsetTop,
+              loading: false,
+            });
+            window.scrollTo(0, (this.state.position * this.state.limit) / 100);
+          }, 100);
         }
       );
-    });
+    }, 500);
+    // }
 
     setInterval(this.setPosition, 30000);
     const sm = new ScrollManager();
     window.addEventListener("window-scroll", (e) => {
       let scroll = e.detail.scrollPosition;
-      this.setState({ limit: this.myRef.current.offsetTop });
+      // this.setState({ limit: this.myRef.current.offsetTop });
       this.setState({ currentPosition: (scroll / this.state.limit) * 100 });
     });
-    setTimeout(() => {
-      this.setState({ limit: this.myRef.current.offsetTop });
-      window.scrollTo(0, (this.state.position * this.state.limit) / 100);
-    }, 800);
   }
-
+  componentWillUnmount() {
+    clearInterval(this.setPosition);
+  }
   setPosition = async () => {
     const url = `${adresse}/users/updateReadingBook/${this.state.id}`;
     await axios({
@@ -85,12 +92,13 @@ class BookReading extends Component {
   click = () => {
     window.scrollTo(0, (this.state.position * this.state.limit) / 100);
   };
+  componentWillMount() {}
   // 4889
-  componentDidUpdate(prevProps, prevState) {}
+  // componentDidUpdate(prevProps, prevState) {}
   render() {
-    console.log(this.state.position, this.state.limit);
     const { book } = this.props;
-    if (book.reading.length === 0) {
+    console.log(book, this.state.loading);
+    if (!book.reading.chapters) {
       return (
         <div
           style={{
@@ -126,12 +134,14 @@ class BookReading extends Component {
               </button>
             ))}
         </div>
-        {book.reading.chapters &&
-          book.reading.chapters[this.state.chapterNr].chapTitle}
-        {book.reading.chapters &&
-          book.reading.chapters[
-            this.state.chapterNr
-          ].akapits.map((akapit, index) => <p>{akapit}</p>)}
+        {book.reading.chapters && this.state.chapterNr !== null
+          ? book.reading.chapters[this.state.chapterNr].chapTitle
+          : null}
+        {book.reading.chapters && this.state.chapterNr !== null
+          ? book.reading.chapters[
+              this.state.chapterNr
+            ].akapits.map((akapit, index) => <p>{akapit}</p>)
+          : null}
         <div className="Ref" ref={this.myRef}>
           .
         </div>

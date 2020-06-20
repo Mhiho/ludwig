@@ -6,7 +6,6 @@ import axios from "../../axiosInstance";
 import { Link } from "react-router-dom";
 import { adresse } from "../../config";
 import classes from "../../styles/books.module.scss";
-import empty from "../../assets/images/empty.png";
 import loading from "../../styles/app.module.scss";
 import { getAllBooks } from "../../actions/BooksAction";
 import { isLoggedIn } from "../../services/auth";

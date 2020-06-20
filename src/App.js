@@ -1,7 +1,7 @@
 import React, { Component, Suspense, lazy } from "react";
 import "./App.module.scss";
 import PrivateRoute from "./_components/PrivateRoute";
-import { HashRouter, Route, Switch } from "react-router-dom";
+import { HashRouter, Route, Switch, HashHistory } from "react-router-dom";
 import { MoonLoader } from "react-spinners";
 import { css } from "@emotion/core";
 import { ThemeProvider } from "./store/ContextAPI";

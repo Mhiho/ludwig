@@ -9,13 +9,16 @@ import { connect } from "react-redux";
 import { fetchCheckpoints } from "../../actions/CheckpointReadingAction";
 
 class Sample extends Component {
-  state = {
-    id: null,
-    book: {},
-    loading: true,
-    purchased: false,
-    chapterNr: null,
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      id: null,
+      book: {},
+      loading: true,
+      purchased: false,
+      chapterNr: null,
+    };
+  }
   async componentDidMount() {
     await this.props.fetchCheckpoints();
     let { id } = await this.props.match.params;
