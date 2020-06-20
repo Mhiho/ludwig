@@ -34,7 +34,6 @@ class BookReading extends Component {
 
     this.setState({ id: id }, () => {});
 
-    // if (book) {
     setTimeout(() => {
       const book = this.props.checkpoints.checkpoints.find(
         (book) => book.bookId === this.state.id
@@ -55,7 +54,6 @@ class BookReading extends Component {
         }
       );
     }, 500);
-    // }
 
     setInterval(this.setPosition, 30000);
     const sm = new ScrollManager();

@@ -33,7 +33,7 @@ class NewChapter extends Component {
       })
         .then((response) => response.json())
         .then((data) => {
-          this.setState({ chapters: data[0].chapters, isLoading: false });
+          this.setState({ chapters: data.chapters, isLoading: false });
         });
     });
   }
@@ -43,7 +43,7 @@ class NewChapter extends Component {
     const url = `${adresse}users/updateMyBook/${this.state.id}`;
     const headers = {
       "Content-Type": "application/json",
-      Authorization: "Bearer " + `${getUser().token}`,
+      Authorization: "Bearer " + getUser().token,
     };
     this.setState(
       {
@@ -78,10 +78,10 @@ class NewChapter extends Component {
   //AKAPIT
   handleAkapitS(event) {
     event.preventDefault();
-    const url = `${adresse}users/updateMyBook/${this.state.id}`;
+    const url = `${adresse}/users/updateMyBook/${this.state.id}`;
     const headers = {
       "Content-Type": "application/json",
-      Authorization: "Bearer " + `${getUser().token}`,
+      Authorization: "Bearer " + getUser().token,
     };
     this.setState(
       { nrOfAkapit: this.state.chapters[this.state.chapterNr].akapits.length },
@@ -124,10 +124,10 @@ class NewChapter extends Component {
   }
 
   deleteAkapit(id) {
-    const url = `${adresse}users/updateMyBook/${this.state.id}`;
+    const url = `${adresse}/users/updateMyBook/${this.state.id}`;
     const headers = {
       "Content-Type": "application/json",
-      Authorization: "Bearer " + `${getUser().token}`,
+      Authorization: "Bearer " + getUser().token,
     };
     const arr = this.state.chapters[this.state.chapterNr].akapits.filter(
       (akapit, index) => index !== id
@@ -173,10 +173,10 @@ class NewChapter extends Component {
       id,
       id + 1
     );
-    const url = `${adresse}users/updateMyBook/${this.state.id}`;
+    const url = `${adresse}/users/updateMyBook/${this.state.id}`;
     const headers = {
       "Content-Type": "application/json",
-      Authorization: "Bearer " + `${getUser().token}`,
+      Authorization: "Bearer " + getUser().token,
     };
     this.setState(
       {
@@ -218,10 +218,10 @@ class NewChapter extends Component {
       id,
       id - 1
     );
-    const url = `${adresse}users/updateMyBook/${this.state.id}`;
+    const url = `${adresse}/users/updateMyBook/${this.state.id}`;
     const headers = {
       "Content-Type": "application/json",
-      Authorization: "Bearer " + `${getUser().token}`,
+      Authorization: "Bearer " + getUser().token,
     };
     this.setState(
       {
@@ -260,7 +260,7 @@ class NewChapter extends Component {
         chaptitle: "",
         akapits: [],
       });
-      const url = `${adresse}users/updateMyBook/${this.state.id}`;
+      const url = `${adresse}/users/updateMyBook/${this.state.id}`;
       const headers = {
         "Content-Type": "application/json",
         Authorization: "Bearer " + `${getUser().token}`,
@@ -295,7 +295,7 @@ class NewChapter extends Component {
   }
   render() {
     console.log(this.state.chapterNr);
-    if (this.state.isLoading === true) {
+    if (this.state.chapters.length === 0) {
       return (
         <div
           style={{
