@@ -166,7 +166,7 @@ const Header = () => {
           <div className={classes.titleAndGoButton}>
             <div className={classes.titleModif}>
               <NavLink className="Title" to="/">
-                IO
+                .IO
               </NavLink>
             </div>
             <div className={classes.GoButton}>

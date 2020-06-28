@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { getUser } from "../../services/auth";
 import { Link } from "react-router-dom";
 import { adresse } from "../../config";
+import classes from "../../styles/profile.module.scss";
 
 class SocialRoom extends Component {
   state = {
@@ -28,14 +29,14 @@ class SocialRoom extends Component {
   render() {
     console.log(this.state.users);
     return (
-      <div>
-        <h2>Społeczność otchłani:</h2>
+      <div className={classes.societyContainer}>
+        <h4>Społeczność Otchłani:</h4>
         {this.state.users.length === 0
           ? null
           : this.state.users.map((user, index) => (
-              <div>
+              <div className={classes.userProfile}>
                 <img src={`${adresse}/${user.thumbnailUrl}`} alt="userPhoto" />
-                <h3>{user.name}</h3>
+                <h6>{user.name}</h6>
               </div>
             ))}
       </div>

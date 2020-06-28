@@ -5,6 +5,7 @@ import classesRoot from "../../styles/index.module.scss";
 import classes from "../../styles/addBook.module.scss";
 import { Link, Redirect } from "react-router-dom";
 import update from "immutability-helper";
+import axios from "../../axiosInstance";
 
 class Writing extends Component {
   state = {
@@ -15,6 +16,9 @@ class Writing extends Component {
     genre: "",
     loaded: false,
     deleted: false,
+    validation: false,
+    showInput: false,
+    inp: "",
   };
 
   componentDidMount() {
@@ -74,25 +78,30 @@ class Writing extends Component {
       });
     }
   }
-  deleteBook = (id) => {
+  validationHandler(id) {
     const headers = {
       "Content-Type": "application/json",
       Authorization: "Bearer " + getUser().token,
     };
-
-    fetch(`${adresse}books/mine/deleteBook/${id}`, {
-      method: "DELETE",
-      headers: headers,
-      body: JSON.stringify({ id: id }),
-    })
-      .then((response) => {
-        return response;
-      })
-      .then((data) => {
-        return this.props.history.push("/");
-      });
+    if (this.state.validation === true) {
+      axios
+        .delete(`${adresse}/books/mine/deleteBook/${id}`, {
+          headers: headers,
+          data: JSON.stringify({ id: id }),
+        })
+        .then((response) => {
+          return response;
+        })
+        .then((data) => {
+          return this.props.history.push("/");
+        });
+    }
+  }
+  deleteBook = () => {
+    this.setState({ showInput: !this.state.showInput });
   };
   render() {
+    console.log(this.state.validation);
     return (
       <div className={classes.BackgroundForBook}>
         <h2>{this.state.book.title}</h2>
@@ -168,6 +177,24 @@ class Writing extends Component {
         <button onClick={() => this.deleteBook(this.state.id)}>
           Usuwam ten bullshit
         </button>
+        {this.state.showInput === true ? (
+          <div>
+            <label>Wpisz tytuł książki i potwierdź usunięcie książki</label>
+            <input
+              value={this.state.inp}
+              onChange={(e) =>
+                this.setState({
+                  inp: e.target.value,
+                  validation:
+                    e.target.value === this.state.book.title ? true : false,
+                })
+              }
+            />
+            <button onClick={() => this.validationHandler(this.state.id)}>
+              Potwierdzam usunięcie
+            </button>
+          </div>
+        ) : null}
       </div>
     );
   }

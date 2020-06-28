@@ -16,7 +16,7 @@ class Sample extends Component {
       book: {},
       loading: true,
       purchased: false,
-      chapterNr: null,
+      chapterNr: 0,
     };
   }
   async componentDidMount() {

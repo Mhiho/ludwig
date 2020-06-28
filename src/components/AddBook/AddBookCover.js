@@ -3,37 +3,57 @@ import { adresse } from "../../config";
 import { getUser } from "../../services/auth";
 import classes from "../../styles/addBook.module.scss";
 import classesRoot from "../../styles/index.module.scss";
-import axios from "axios";
-import empty from "../../assets/images/empty.png";
+import axios from "../../axiosInstance";
 import { Redirect } from "react-router-dom";
 
 class AddBookCover extends Component {
   state = {
-    file: "file",
     preview: null,
     id: "",
     sent: false,
     error: "",
     btnCt: "",
     redirect: false,
+    book: {},
+    file: null,
+    imagePreviewUrl: "",
   };
 
   componentDidMount() {
     let { id } = this.props.match.params;
     this.setState({ id: id });
+    const url = `${adresse}/books/${id}`;
+
+    const headers = {
+      "Content-Type": "application/json",
+      Authorization: "Bearer " + getUser().token,
+    };
+    axios
+      .get(url, {
+        headers: headers,
+      })
+      .then((res) => {
+        console.log(res.data);
+        this.setState({ book: res.data });
+      })
+      .catch(function (error) {
+        // handle error
+        console.log(error);
+      });
   }
 
   addImg = (event) => {
     event.preventDefault();
-
-    const url = `${adresse}/books/mine/addImage/${this.state.id}`;
+    const url = `${adresse}/books/mine/${this.state.id}/addCover`;
     const headers = {
-      "content-type": "file",
+      "Content-Type": "multipart/form-data",
       Authorization: "Bearer " + getUser().token,
     };
-
+    console.log(headers);
+    const formData = new FormData();
+    formData.append("image", this.state.file, this.state.file.name);
     axios
-      .post(url, {
+      .post(url, formData, {
         headers: headers,
       })
       .then((res) => {
@@ -55,6 +75,18 @@ class AddBookCover extends Component {
 
   handleImageChange(event) {
     event.preventDefault();
+
+    let reader = new FileReader();
+    let file = event.target.files[0];
+
+    reader.onloadend = () => {
+      this.setState({
+        file: file,
+        imagePreviewUrl: reader.result,
+      });
+    };
+
+    reader.readAsDataURL(file);
   }
   goFurther = () => {
     if (this.state.sent === true) {
@@ -65,6 +97,7 @@ class AddBookCover extends Component {
   };
 
   render() {
+    console.log(this.state.file);
     if (this.state.redirect === true) {
       return <Redirect to={`/myBooks/${this.state.id}/writing`} />;
     }
@@ -77,7 +110,7 @@ class AddBookCover extends Component {
           <div className={classes.inptsContainer}>
             <input
               className={`${classes.fileAdd} ${classes.inpt}`}
-              name="coverBookImage"
+              name="image"
               accept="image/png, image/jpeg, image/jpg"
               type="file"
               onChange={(e) => this.handleImageChange(e)}
@@ -96,11 +129,14 @@ class AddBookCover extends Component {
           </button>
         </div>
         <div className={classes.frameContainer}>
-          {this.state.preview ? (
-            <img src={this.state.preview} />
-          ) : (
-            <img src={empty} />
-          )}
+          <img
+            alt="bookCover"
+            src={
+              this.state.imagePreviewUrl !== ""
+                ? this.state.imagePreviewUrl
+                : `${adresse}/${this.state.book.coverUrl}`
+            }
+          />
         </div>
       </div>
     );

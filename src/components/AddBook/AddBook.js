@@ -81,7 +81,7 @@ class AddBook extends Component {
               value={this.state.title}
             />
           </label>
-          <label>
+          {/* <label>
             <span>Autor</span>
             <input
               name="author"
@@ -91,7 +91,7 @@ class AddBook extends Component {
               }
               value={this.state.author}
             />
-          </label>
+          </label> */}
           <label>
             <span>Rok powstania</span>
             <input

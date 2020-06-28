@@ -33,7 +33,7 @@ class Books extends Component {
 
   addOwnBook = () => {
     if (isLoggedIn() === true) {
-      return <Redirect to="/addBook" />;
+      this.props.history.push("/addBook");
     } else {
       return;
     }

@@ -3,3 +3,19 @@
   height: 150px;
   border-radius: 50%;
 }
+
+.societyContainer img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+.userProfile {
+  width: 100px;
+  height: 100px;
+  border: 3px solid #eee;
+  margin: 4px 4px 4px 4px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
