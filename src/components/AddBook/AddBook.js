@@ -53,7 +53,7 @@ class AddBook extends Component {
   };
 
   handleChangePublic = (event) => {
-    event.target.value == "true"
+    event.target.value === "true"
       ? this.setState({ public: true })
       : this.setState({ public: false });
   };
@@ -173,8 +173,8 @@ class AddBook extends Component {
           <div className={classes.categoriesContainer}>
             {this.state.cat.map((category, index) => (
               <span className={classes.Category} key={index}>
-                #{category}{" "}
-                <strong onClick={() => this.deleteCategory(index)}>× </strong>{" "}
+                #{category}
+                <strong onClick={() => this.deleteCategory(index)}>× </strong>
               </span>
             ))}
           </div>

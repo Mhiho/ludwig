@@ -12,7 +12,7 @@ class NewChapter extends Component {
     isLoading: true,
     id: "",
     chapterNr: "",
-    chaptitle: "",
+    chapTitle: "",
     chaptitleSent: false,
     nrOfAkapit: 0,
     arrayOfNr: [],
@@ -40,7 +40,7 @@ class NewChapter extends Component {
   //TITLE
   handleSubmit(event) {
     event.preventDefault();
-    const url = `${adresse}users/updateMyBook/${this.state.id}`;
+    const url = `${adresse}/users/updateMyBook/${this.state.id}`;
     const headers = {
       "Content-Type": "application/json",
       Authorization: "Bearer " + getUser().token,
@@ -49,7 +49,7 @@ class NewChapter extends Component {
       {
         chapters: update(this.state.chapters, {
           [this.state.chapterNr]: {
-            chaptitle: { $set: this.state.chaptitle },
+            chapTitle: { $set: this.state.chapTitle },
           },
         }),
       },
@@ -67,7 +67,7 @@ class NewChapter extends Component {
             return response.json();
           })
           .then((data) => {
-            if (this.state.chapters[this.state.chapterNr].chaptitle != "") {
+            if (this.state.chapters[this.state.chapterNr].chapTitle !== "") {
               this.setState({ chaptitleSent: true });
             }
           });
@@ -257,7 +257,7 @@ class NewChapter extends Component {
     event.preventDefault();
     this.setState({ chapterNr: parseInt(this.state.chapterNr, 10) + 1 }, () => {
       this.state.chapters.push({
-        chaptitle: "",
+        chapTitle: "",
         akapits: [],
       });
       const url = `${adresse}/users/updateMyBook/${this.state.id}`;
@@ -317,17 +317,17 @@ class NewChapter extends Component {
           <div className={classes.newChapContainer}>
             wpisz tytuł rozdziału:
             <input
-              name="chaptitle"
+              name="chapTitle"
               type="text"
-              onChange={(e) => this.setState({ chaptitle: e.target.value })}
-              value={this.state.chaptitle}
+              onChange={(e) => this.setState({ chapTitle: e.target.value })}
+              value={this.state.chapTitle}
             />
           </div>
           <h2>
             Rozdział:{" "}
             {this.state.chapters[this.state.chapterNr] === undefined
               ? null
-              : this.state.chapters[this.state.chapterNr].chaptitle}
+              : this.state.chapters[this.state.chapterNr].chapTitle}
           </h2>
           <input
             type="submit"

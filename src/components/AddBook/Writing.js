@@ -6,6 +6,8 @@ import classes from "../../styles/addBook.module.scss";
 import { Link, Redirect } from "react-router-dom";
 import update from "immutability-helper";
 import axios from "../../axiosInstance";
+import { faPen } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 class Writing extends Component {
   state = {
@@ -13,6 +15,8 @@ class Writing extends Component {
     id: "",
     img: "",
     changeGenre: false,
+    changeCat: false,
+    cat: [],
     genre: "",
     loaded: false,
     deleted: false,
@@ -34,13 +38,54 @@ class Writing extends Component {
       })
         .then((response) => response.json())
         .then((book) => {
-          this.setState({ book }, () => {
+          this.setState({ book: book, cat: book.categories }, () => {
             this.setState({ loaded: true });
           });
         });
     });
   }
-
+  addCat = (event) => {
+    const headers = {
+      "Content-Type": "application/json",
+      Authorization: "Bearer " + getUser().token,
+    };
+    let array = [...this.state.cat];
+    array = [...array, event.target.value];
+    const ar = [...new Set(array)];
+    this.setState({ cat: ar }, () => {
+      fetch(`${adresse}/books/mine/patchCat/${this.state.id}`, {
+        method: "PATCH",
+        headers: headers,
+        body: JSON.stringify({ categories: this.state.cat }),
+      })
+        .then((response) => {
+          if (!response.ok) {
+          }
+          return response.json();
+        })
+        .then((data) => {});
+    });
+  };
+  deleteCategory(id) {
+    let cat = this.state.cat;
+    cat.splice(id, 1);
+    this.setState({ cat });
+    const headers = {
+      "Content-Type": "application/json",
+      Authorization: "Bearer " + getUser().token,
+    };
+    fetch(`${adresse}/books/mine/patchCat/${this.state.id}`, {
+      method: "PATCH",
+      headers: headers,
+      body: JSON.stringify({ categories: this.state.cat }),
+    })
+      .then((response) => {
+        if (!response.ok) {
+        }
+        return response.json();
+      })
+      .then((data) => {});
+  }
   changeGenre = (event) => {
     this.setState({ genre: event.target.value }, () => {
       const headers = {
@@ -49,7 +94,7 @@ class Writing extends Component {
       };
       let { id } = this.props.match.params;
       this.setState({ id: id }, () => {
-        fetch(`${adresse}books/mine/patchGenre/${this.state.id}`, {
+        fetch(`${adresse}/books/mine/patchGenre/${this.state.id}`, {
           method: "PATCH",
           headers: headers,
           body: JSON.stringify({ genre: this.state.genre }),
@@ -68,6 +113,11 @@ class Writing extends Component {
       changeGenre: !this.state.changeGenre,
     });
   }
+  chagnerCatHandler() {
+    this.setState({
+      changeCat: !this.state.changeCat,
+    });
+  }
 
   componentDidUpdate(prevProps, prevState) {
     if (prevState.book.genre !== this.state.genre && this.state.genre !== "") {
@@ -75,6 +125,7 @@ class Writing extends Component {
         book: update(this.state.book, {
           genre: { $set: this.state.genre },
         }),
+        changeGenre: false,
       });
     }
   }
@@ -101,7 +152,7 @@ class Writing extends Component {
     this.setState({ showInput: !this.state.showInput });
   };
   render() {
-    console.log(this.state.validation);
+    console.log(this.state.cat);
     return (
       <div className={classes.BackgroundForBook}>
         <h2>{this.state.book.title}</h2>
@@ -109,8 +160,7 @@ class Writing extends Component {
           <img src={`${adresse}/${this.state.book.coverUrl}`} alt="cover" />
         </div>
         <div className={classes.writingContainer}>
-          <p>{this.state.book.genre}</p>{" "}
-          <button onClick={() => this.chagnerGenreHandler()}>Edytuj</button>{" "}
+          <p>Rodzaj literacki: &nbsp;&nbsp;</p>
           {this.state.changeGenre ? (
             <div>
               <select
@@ -118,31 +168,75 @@ class Writing extends Component {
                 onChange={(event) => this.changeGenre(event)}
               >
                 <option value=""></option>
-                <option value="kryminał">Kryminał</option>
-                <option value="powieść psychologiczna">
+                <option value="Kryminał">Kryminał</option>
+                <option value="Powieść psychologiczna">
                   Powieść psychologiczna
                 </option>
-                <option value="powieść romantyczna">Powieść romantyczna</option>
-                <option value="powieść obyczajowa">Powieść obyczajowa</option>
-                <option value="eseje">Eseje</option>
-                <option value="thriller">Thriller</option>
-                <option value="powieść humorystyczna">
+                <option value="Powieść romantyczna">Powieść romantyczna</option>
+                <option value="Powieść obyczajowa">Powieść obyczajowa</option>
+                <option value="Eseje">Eseje</option>
+                <option value="Thriller">Thriller</option>
+                <option value="Powieść humorystyczna">
                   Powieść humorystycza
                 </option>
-                <option value="horror">Horror</option>
-                <option value="si-fi">Si-Fi</option>
-                <option value="fantastyka">Fantastyka</option>
-                <option value="literatura faktu">Literatura faktu</option>
-                <option value="dla dzieci i młodzieży">
+                <option value="Horror">Horror</option>
+                <option value="Si-fi">Si-Fi</option>
+                <option value="Fantastyka">Fantastyka</option>
+                <option value="Literatura faktu">Literatura faktu</option>
+                <option value="Dla dzieci i młodzieży">
                   Dla dzieci i młodzieży
                 </option>
-              </select>{" "}
+              </select>
             </div>
-          ) : null}{" "}
+          ) : (
+            <p>{this.state.book.genre}</p>
+          )}
+          <FontAwesomeIcon
+            icon={faPen}
+            onClick={() => this.chagnerGenreHandler()}
+          />
         </div>
         <div className={classes.writingContainer}>
-          {this.state.book.categories &&
-            this.state.book.categories.map((cat) => <span>cat</span>)}
+          <p>Kategoria: &nbsp;&nbsp;</p>
+          {this.state.cat ? (
+            this.state.changeCat ? (
+              <div>
+                <select
+                  multiple={true}
+                  value={this.state.cat}
+                  onChange={this.addCat}
+                >
+                  <option value="czytadło">czytadło</option>
+                  <option value="nowela">nowela</option>
+                  <option value="borgesowska">borgesowska</option>
+                  <option value="realizm magiczny">realizm magiczny</option>
+                  <option value="opera mydlana">opera mydlana</option>
+                  <option value="dekadencja">dekadencja</option>
+                  <option value="romantyzm">romantyzm</option>
+                  <option value="klasycznie">klasycznie</option>
+                  <option value="cyberpunk">cyberpunk</option>
+                  <option value="przy świecy">przy świecy</option>
+                  <option value="kropla drąży skałę">kropla drąży skałę</option>
+                  <option value="brutalna">brutalna</option>
+                  <option value="abstrakcja">abstrakcja</option>
+                  <option value="kości zostały rzucone">
+                    kości zostały rzucone
+                  </option>
+                </select>
+              </div>
+            ) : (
+              this.state.cat.map((cat, index) => (
+                <p>
+                  {cat}
+                  <strong onClick={() => this.deleteCategory(index)}>× </strong>
+                </p>
+              ))
+            )
+          ) : null}
+          <FontAwesomeIcon
+            icon={faPen}
+            onClick={() => this.chagnerCatHandler()}
+          />
         </div>
         <div className={classes.writingContainer}>
           {this.state.book.description}

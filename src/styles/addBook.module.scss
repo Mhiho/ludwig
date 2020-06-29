@@ -45,6 +45,10 @@ img {
   justify-content: center;
   align-items: center;
 }
+.frameContainer img {
+  width: 360px;
+  height: 500px;
+}
 .fileAdd {
   border-bottom: 4px solid tan;
   border-right: 4px solid tan;
@@ -80,6 +84,26 @@ img {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+.writingContainer > svg {
+  transform: scale(0.6, 0.6);
+  margin-left: 10px;
+  margin-bottom: 3px;
+  position: sticky;
+}
+.writingContainer p {
+  margin: 0;
+  height: 31px;
+}
+.writingContainer select {
+  margin-left: 10px;
+  background: #363b3f;
+  color: white;
+  border: none;
+}
+select:focus {
+  border: none;
+  outline: none;
 }
 .writingContainer img {
   width: 100px;
